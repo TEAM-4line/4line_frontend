@@ -66,16 +66,16 @@ const InputTitle = styled.div`
 `;
 
 const LoginInput = styled.input`
-  font-size: 18px;
+  font-size: 16px;
   width: 520px;
   padding: 0px 20px;
-  height: 63px;
+  height: 60px;
   border-radius: 10px;
   border: 1px solid #eeeeee;
   margin: 0px 40px 30px 40px;
   outline: none;
   &:focus {
-    outline: 1px solid #ff9b29;
+    outline: 1px solid var(--orange);
     box-shadow: 15px 15px 20px 0px rgba(211, 209, 216, 0.25);
   }
   /* &::placeholder {
@@ -87,7 +87,7 @@ const LoginButton = styled.button`
   font-size: 20px;
   font-weight: bold;
   color: white;
-  background-color: #ff9b29;
+  background-color: var(--orange);
   border-radius: 20px;
   border: none;
   cursor: pointer;
