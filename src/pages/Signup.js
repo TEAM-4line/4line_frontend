@@ -107,7 +107,7 @@ const LoginButton = styled.button`
   cursor: pointer;
   width: 520px;
   height: 63px;
-  margin: 70px 40px 15px 40px;
+  margin: 85px 40px 15px 40px;
 `;
 
 const Already = styled.div`
