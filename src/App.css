@@ -40,3 +40,8 @@
     transform: rotate(360deg);
   }
 }
+
+:root {
+  --orange: #ff9b29;
+  --beige: #fff9f0;
+}
