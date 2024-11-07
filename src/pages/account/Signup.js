@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import OrangeBtn from "../../components/common/OrangeBtn";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
@@ -63,7 +64,9 @@ const Signup = () => {
             placeholder="비밀번호를 입력해주세요"
           />
         </form>
-        <LoginButton>회원가입</LoginButton>
+        <LoginButton>
+          <OrangeBtn txt={"회원가입"} />
+        </LoginButton>
         <Already>
           이미 계정이 있으신가요?
           <StyledLink to="/login">로그인</StyledLink>
@@ -77,7 +80,6 @@ export default Signup;
 
 const Wrapper = styled.div`
   width: 412px;
-  height: 917px;
   margin: 0 auto;
   box-sizing: border-box;
 `;
@@ -85,7 +87,7 @@ const Wrapper = styled.div`
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 8px;
   padding: 60px 0px 27px 27px;
 `;
 
@@ -103,19 +105,19 @@ const RequiredTxt = styled.div`
 const InputTitle = styled.div`
   font-size: 20px;
   font-weight: bold;
-  color: #9796a1;
+  color: var(--grey);
   padding: 0px 27px;
   margin-bottom: 10px;
 `;
 
 const LoginInput = styled.input`
   font-size: 16px;
-  width: 356px;
+  width: 357px;
   height: 65px;
   border-radius: 10px;
   border: 1px solid #eeeeee;
   padding: 0px 20px;
-  margin: 0px 27px 40px 27px;
+  margin: 0px 27px 30px 27px;
   outline: none;
   &:focus {
     outline: 1px solid var(--orange);
@@ -123,17 +125,8 @@ const LoginInput = styled.input`
   }
 `;
 
-const LoginButton = styled.button`
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  background-color: var(--orange);
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  width: 356px;
-  height: 65px;
-  margin: 180px 27px 10px 27px;
+const LoginButton = styled.div`
+  margin: 82px 27px 10px 27px;
 `;
 
 const Already = styled.div`

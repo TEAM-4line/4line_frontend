@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import OrangeBtn from "../../components/common/OrangeBtn";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -37,7 +38,9 @@ const Signup = () => {
             placeholder="비밀번호를 입력해주세요"
           />
         </form>
-        <LoginButton>로그인</LoginButton>
+        <BtnContainer>
+          <OrangeBtn txt={"로그인"} />
+        </BtnContainer>
       </Wrapper>
     </div>
   );
@@ -47,7 +50,6 @@ export default Signup;
 
 const Wrapper = styled.div`
   width: 412px;
-  height: 917px;
   margin: 0 auto;
   box-sizing: border-box;
 `;
@@ -55,13 +57,13 @@ const Wrapper = styled.div`
 const Txt = styled.div`
   font-size: 36px;
   font-weight: bold;
-  padding: 60px 0px 60px 27px;
+  padding: 60px 0px 65px 27px;
 `;
 
 const InputTitle = styled.div`
   font-size: 20px;
   font-weight: bold;
-  color: #9796a1;
+  color: var(--grey);
   padding: 0px 27px;
   margin-bottom: 10px;
 `;
@@ -81,15 +83,6 @@ const LoginInput = styled.input`
   }
 `;
 
-const LoginButton = styled.button`
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  background-color: var(--orange);
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  width: 356px;
-  height: 65px;
-  margin: 318px 27px 10px 27px;
+const BtnContainer = styled.div`
+  margin: 180px 27px 10px 27px;
 `;
