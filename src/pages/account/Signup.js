@@ -97,6 +97,7 @@ const Txt = styled.div`
 const RequiredTxt = styled.div`
   font-size: 16px;
   color: var(--grey);
+  font-weight: 600;
 `;
 
 const InputTitle = styled.div`
