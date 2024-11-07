@@ -45,9 +45,10 @@ const Login = () => {
 export default Login;
 
 const Wrapper = styled.div`
-  width: 600px;
+  width: 412px;
   margin: 0 auto;
   box-sizing: border-box;
+  background-color: #eee;
 `;
 
 const Txt = styled.div`
