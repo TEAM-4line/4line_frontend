@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavExplore from "../../images/nav-explore.svg";
 import NavSpaces from "../../images/nav-spaces.svg";
 import NavReviews from "../../images/nav-reviews.svg";
 import NavProfile from "../../images/nav-profile.svg";
 
-const NavBar = () => {
-  const [selectedNav, setSelectedNav] = useState(0);
+const NavBar = ({ navIndex }) => {
+  const [selectedNav, setSelectedNav] = useState(navIndex || 0);
+
+  useEffect(() => {
+    setSelectedNav(navIndex);
+  }, [navIndex]);
 
   function handleSelectedNav(navIndex) {
     setSelectedNav(navIndex);

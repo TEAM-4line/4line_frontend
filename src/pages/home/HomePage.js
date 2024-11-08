@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div>
       <Wrapper>
-        <NavBar />
+        <NavBar navIndex={0} />
       </Wrapper>
     </div>
   );
