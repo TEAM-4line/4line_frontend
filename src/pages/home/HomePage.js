@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 
 const HomePage = () => {
   return (
     <div>
       <Wrapper>
+        <TopBar />
         <NavBar navIndex={0} />
       </Wrapper>
     </div>
