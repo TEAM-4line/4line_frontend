@@ -42,7 +42,9 @@
 }
 
 :root {
+  --bgorange: #ff9c00;
   --orange: #ff9b29;
   --beige: #fff9f0;
   --grey: #9796a1;
+  --brown: #48240d;
 }

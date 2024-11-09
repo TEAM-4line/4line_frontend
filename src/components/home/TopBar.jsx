@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import BackBtn from "../../images/back-btn.svg";
-import SampleProfile from "../../images/sample-profile.svg";
 
-const TopBar = () => {
+const TopBar = ({ userImg }) => {
   return (
     <div>
       <TopWrapper>
         <BackBtnBox src={BackBtn} alt="뒤로가기 버튼" />
         <TopTitle>Home</TopTitle>
-        <ProfileImg src={SampleProfile} alt="샘플 프로필 이미지" />
+        <UserImg src={userImg} alt="샘플 프로필 이미지" />
       </TopWrapper>
     </div>
   );
@@ -18,7 +17,7 @@ const TopBar = () => {
 export default TopBar;
 
 const TopWrapper = styled.div`
-  width: 412px;
+  width: 413px;
   height: 86px;
   background-color: white;
   position: fixed;
@@ -40,7 +39,7 @@ const TopTitle = styled.div`
   font-weight: 600;
 `;
 
-const ProfileImg = styled.img`
+const UserImg = styled.img`
   width: 38px;
   border-radius: 12px;
 `;
