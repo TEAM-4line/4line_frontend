@@ -31,6 +31,7 @@ const TopWrapper = styled.div`
 
 const BackBtnBox = styled.img`
   width: 38px;
+
   border-radius: 12px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 `;

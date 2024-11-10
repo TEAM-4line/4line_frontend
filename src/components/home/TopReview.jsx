@@ -13,33 +13,33 @@ const TopReview = () => {
       id: 1,
       image: SampleImg,
       title: "Another A+ tour",
-      location: "New York",
-      likes: 123,
-      bookmarks: 502,
+      location: "Banff, Canada",
+      likes: 1116,
+      bookmarks: 51,
     },
     {
       id: 2,
       image: SampleImg,
       title: "Another A+ tour",
-      location: "New York",
-      likes: 123,
-      bookmarks: 502,
+      location: "Banff, Canada",
+      likes: 1116,
+      bookmarks: 51,
     },
     {
       id: 3,
       image: SampleImg,
       title: "Another A+ tour",
-      location: "New York",
-      likes: 123,
-      bookmarks: 502,
+      location: "Banff, Canada",
+      likes: 1116,
+      bookmarks: 51,
     },
     {
       id: 4,
       image: SampleImg,
       title: "Another A+ tour",
-      location: "New York",
-      likes: 123,
-      bookmarks: 502,
+      location: "Banff, Canada",
+      likes: 1116,
+      bookmarks: 51,
     },
   ];
 
@@ -123,4 +123,5 @@ const Icon = styled.img`
 const Text = styled.span`
   font-size: 12px;
   color: #6f7789;
+  font-weight: light;
 `;

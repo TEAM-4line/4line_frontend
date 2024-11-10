@@ -125,6 +125,7 @@ const Title = styled.div`
   font-weight: 500;
 `;
 const ViewAll = styled.button`
+  color: black;
   font-size: 14px;
   border: none;
   background: none;
