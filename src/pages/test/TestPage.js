@@ -7,10 +7,10 @@ const TestPage = () => {
   const [answers, setAnswers] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const handleOptionClick = (questionId, selectedOption) => {
+  const handleOptionClick = (questionId, optionId) => {
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [questionId]: selectedOption, // 선택된 옵션만 answer 객체로 저장 (백 연동 때 사용)
+      [questionId]: optionId, // 선택된 옵션의 id만 저장
     }));
   };
 
@@ -42,17 +42,19 @@ const TestPage = () => {
           <TestOptions>
             {currentQuestion.options.map((option, idx) => (
               <OptionLabel
-                key={idx}
-                isSelected={answers[currentQuestion.id] === option}
+                key={option.id}
+                isSelected={answers[currentQuestion.id] === option.id}
               >
                 <OptionInput
                   type="radio"
                   name={`question${currentQuestion.id}`}
-                  value={option}
-                  checked={answers[currentQuestion.id] === option}
-                  onChange={() => handleOptionClick(currentQuestion.id, option)}
+                  value={option.id}
+                  checked={answers[currentQuestion.id] === option.id}
+                  onChange={() =>
+                    handleOptionClick(currentQuestion.id, option.id)
+                  }
                 />
-                {option}
+                {option.label}
               </OptionLabel>
             ))}
           </TestOptions>

@@ -41,7 +41,7 @@ const Title = styled.div`
 `;
 
 const StyledImg = styled.img`
-  height: 393px;
-  margin-top: 104px;
+  height: 400px;
+  margin-top: 102px;
   margin-left: 70px;
 `;
