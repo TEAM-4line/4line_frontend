@@ -6,6 +6,7 @@ import NavBar from "../../components/home/NavBar";
 import CategoryZone from "../../components/home/CategoryZone";
 import SampleProfile from "../../images/sample-profile.svg";
 import TypeLion from "../../images/type-lion.svg";
+import TopReview from "../../components/home/TopReview";
 
 const HomePage = () => {
   const userInfo = {
@@ -41,6 +42,7 @@ const HomePage = () => {
             <Title>Top Reviews</Title>
             <ViewAll>View All</ViewAll>
           </TitleBox>
+          <TopReview />
         </TopReviewBox>
         <NavBar navIndex={0} />
       </ContentBox>
@@ -57,7 +59,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentBox = styled.div`
-  margin-top: 86px;
+  margin: 86px 0px;
   background: linear-gradient(to bottom, #ff9c00, white);
   min-height: 780px;
   overflow-y: scroll;
