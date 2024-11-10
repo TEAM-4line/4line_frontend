@@ -1,7 +1,7 @@
 import React from "react";
-import BookmarkFalse from "../../images/icon-bookmark-false.svg";
+// import BookmarkFalse from "../../images/icon-bookmark-false.svg";
 import BookmarkTrue from "../../images/icon-bookmark-true.svg";
-import HeartFalse from "../../images/icon-heart-false.svg";
+// import HeartFalse from "../../images/icon-heart-false.svg";
 import HeartTrue from "../../images/icon-heart-true.svg";
 import LocationIcon from "../../images/icon-location.svg";
 import SampleImg from "../../images/review-sample.png";

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import LionType from "../../images/category-lion.svg";
-import OwlType from "../../images/category-owl.svg";
-import MonkeyType from "../../images/category-monkey.svg";
-import CatType from "../../images/category-cat.svg";
-import DolphinType from "../../images/category-dolphin.svg";
-import FoxType from "../../images/category-fox.svg";
+import LionType from "../../images/category-lion.png";
+import OwlType from "../../images/category-owl.png";
+import MonkeyType from "../../images/category-monkey.png";
+import CatType from "../../images/category-cat.png";
+import DolphinType from "../../images/category-dolphin.png";
+import FoxType from "../../images/category-fox.png";
 
 const CategoryZone = () => {
   return (
@@ -40,4 +40,6 @@ const CategoryBox = styled.div`
 const CategoryBtn = styled.img`
   cursor: pointer;
   margin: 0px 9px;
+  width: 76px;
+  height: 71px;
 `;
