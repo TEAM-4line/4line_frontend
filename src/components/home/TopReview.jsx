@@ -1,7 +1,5 @@
 import React from "react";
-// import BookmarkFalse from "../../images/icon-bookmark-false.svg";
 import BookmarkTrue from "../../images/icon-bookmark-true.svg";
-// import HeartFalse from "../../images/icon-heart-false.svg";
 import HeartTrue from "../../images/icon-heart-true.svg";
 import LocationIcon from "../../images/icon-location.svg";
 import SampleImg from "../../images/review-sample.png";
@@ -83,7 +81,7 @@ const TopReviewWrapper = styled.div`
   height: 128px;
   padding: 12px 17px;
   gap: 12px;
-  margin: 8px 0px;
+  margin: 10px 0px;
   cursor: pointer;
 `;
 

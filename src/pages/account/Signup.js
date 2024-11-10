@@ -1,78 +1,104 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import OrangeBtn from "../../components/common/OrangeBtn";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
+  const [birth, setBirth] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [introduce, setIntroduce] = useState("");
 
-  const onChangename = (e) => {
+  const onChangeName = (e) => {
     setName(e.target.value);
+  };
+  const onChangeBirth = (e) => {
+    setBirth(e.target.value);
   };
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
-  const onchangePassword = (e) => {
+  const onChangePassword = (e) => {
     setPassword(e.target.value);
+  };
+  const onChangeIntro = (e) => {
+    setIntroduce(e.target.value);
   };
 
   return (
-    <div>
-      <Wrapper>
-        <TextBox>
-          <Txt>회원가입</Txt>
-          <RequiredTxt>
-            회원 정보를 입력해주세요. (
-            <span style={{ color: `var(--orange)` }}>*</span> 필수 입력 항목)
-          </RequiredTxt>
-        </TextBox>
-        <form>
-          <InputTitle>
-            이름<span style={{ color: `var(--orange)` }}>*</span>
-          </InputTitle>
-          <LoginInput
-            id="name"
-            name="name"
-            value={name}
-            onChange={onChangename}
-            type="name"
-            placeholder="이름을 입력해주세요"
-          />
-          <InputTitle>
-            이메일<span style={{ color: `var(--orange)` }}>*</span>
-          </InputTitle>
-          <LoginInput
-            id="email"
-            name="email"
-            value={email}
-            onChange={onChangeEmail}
-            type="email"
-            placeholder="이메일을 입력해주세요"
-          />
-          <InputTitle>
-            비밀번호<span style={{ color: `var(--orange)` }}>*</span>
-          </InputTitle>
-          <LoginInput
-            id="password"
-            name="password"
-            value={password}
-            onChange={onchangePassword}
-            type="password"
-            placeholder="비밀번호를 입력해주세요"
-          />
-        </form>
-        <LoginButton>
-          <OrangeBtn txt={"회원가입"} />
-        </LoginButton>
-        <Already>
-          이미 계정이 있으신가요?
-          <StyledLink to="/login">로그인</StyledLink>
-        </Already>
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <TextBox>
+        <Txt>회원가입</Txt>
+        <RequiredTxt>
+          회원 정보를 입력해주세요. (<span>*</span> 필수 입력 항목)
+        </RequiredTxt>
+      </TextBox>
+      <form>
+        <InputTitle>
+          이름<span>*</span>
+        </InputTitle>
+        <LoginInput
+          id="name"
+          name="name"
+          value={name}
+          onChange={onChangeName}
+          type="text"
+          placeholder="이름을 입력해주세요"
+        />
+        <InputTitle>
+          생년월일<span>*</span>
+        </InputTitle>
+        <LoginInput
+          id="birth"
+          name="birth"
+          value={birth}
+          onChange={onChangeBirth}
+          type="date"
+          placeholder="생년월일을 입력해주세요"
+        />
+        <InputTitle>
+          이메일<span>*</span>
+        </InputTitle>
+        <LoginInput
+          id="email"
+          name="email"
+          value={email}
+          onChange={onChangeEmail}
+          type="email"
+          placeholder="이메일을 입력해주세요"
+        />
+        <InputTitle>
+          비밀번호<span>*</span>
+        </InputTitle>
+        <LoginInput
+          id="password"
+          name="password"
+          value={password}
+          onChange={onChangePassword}
+          type="password"
+          placeholder="비밀번호를 입력해주세요"
+        />
+        <InputTitle>
+          한 줄 소개<span>*</span>
+        </InputTitle>
+        <LoginInput
+          id="introduce"
+          name="introduce"
+          value={introduce}
+          onChange={onChangeIntro}
+          type="text"
+          placeholder="나만의 한 줄 소개를 입력해주세요"
+        />
+      </form>
+      <LoginButton>
+        <OrangeBtn txt={"회원가입"} />
+      </LoginButton>
+      <Already>
+        이미 계정이 있으신가요?
+        <StyledLink to="/login">로그인</StyledLink>
+      </Already>
+    </Wrapper>
   );
 };
 
@@ -100,6 +126,9 @@ const RequiredTxt = styled.div`
   font-size: 16px;
   color: var(--grey);
   font-weight: 600;
+  > span {
+    color: var(--orange);
+  }
 `;
 
 const InputTitle = styled.div`
@@ -108,6 +137,9 @@ const InputTitle = styled.div`
   color: var(--grey);
   padding: 0px 27px;
   margin-bottom: 10px;
+  > span {
+    color: var(--orange);
+  }
 `;
 
 const LoginInput = styled.input`
@@ -126,13 +158,14 @@ const LoginInput = styled.input`
 `;
 
 const LoginButton = styled.div`
-  margin: 82px 27px 10px 27px;
+  margin: 140px 27px 10px 27px;
 `;
 
 const Already = styled.div`
   color: #5b5b5e;
   font-size: 16px;
   text-align: center;
+  margin-bottom: 60px;
 `;
 
 const StyledLink = styled(Link)`
@@ -140,6 +173,7 @@ const StyledLink = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   margin-left: 5px;
+
   &:hover {
     text-decoration: underline;
   }

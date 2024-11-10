@@ -12,12 +12,16 @@ const CategoryZone = () => {
     <div>
       <CategoryWrapper>
         <CategoryBox>
-          <CategoryBtn src={LionType} />
-          <CategoryBtn src={OwlType} />
-          <CategoryBtn src={MonkeyType} />
-          <CategoryBtn src={CatType} />
-          <CategoryBtn src={DolphinType} />
-          <CategoryBtn src={FoxType} />
+          <CategoryLeft>
+            <CategoryBtn src={LionType} />
+            <CategoryBtn src={DolphinType} />
+            <CategoryBtn src={MonkeyType} />
+          </CategoryLeft>
+          <CategoryRight>
+            <CategoryBtn src={CatType} />
+            <CategoryBtn src={OwlType} />
+            <CategoryBtn src={FoxType} />
+          </CategoryRight>
         </CategoryBox>
       </CategoryWrapper>
     </div>
@@ -27,19 +31,24 @@ const CategoryZone = () => {
 export default CategoryZone;
 
 const CategoryWrapper = styled.div`
-  height: 164px;
   margin-bottom: 30px;
+  padding: 0px 33px;
 `;
-const CategoryBox = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 22px;
-  justify-content: center;
-  align-content: center;
+const CategoryBox = styled.div``;
+
+const CategoryLeft = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: left;
+`;
+const CategoryRight = styled.div`
+  display: flex;
+  gap: 13px;
+  justify-content: right;
 `;
 const CategoryBtn = styled.img`
   cursor: pointer;
-  margin: 0px 9px;
-  width: 76px;
-  height: 71px;
+  width: 90px;
+  height: 90px;
+  /* border: 1px solid var(--orange); */
 `;

@@ -1,4 +1,3 @@
-// HomePage.js
 import React from "react";
 import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
@@ -18,7 +17,7 @@ const HomePage = () => {
 
   return (
     <Wrapper>
-      <TopBar userImg={userInfo.profileImg} />
+      <TopBar userImg={userInfo.profileImg} PageName={"Home"} />
       <ContentBox>
         <UserBox>
           <UserInfo>
@@ -44,7 +43,7 @@ const HomePage = () => {
           </TitleBox>
           <TopReview />
         </TopReviewBox>
-        <NavBar navIndex={0} />
+        <NavBar />
       </ContentBox>
     </Wrapper>
   );
@@ -59,7 +58,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentBox = styled.div`
-  margin: 86px 0px;
+  margin: 80px 0px;
   background: linear-gradient(to bottom, #ff9c00, white);
   min-height: 780px;
   overflow-y: scroll;
@@ -69,9 +68,9 @@ const ContentBox = styled.div`
 `;
 
 const UserBox = styled.div`
-  width: 368px;
+  width: 348px;
   height: 164px;
-  margin: 39px 22px 30px 22px;
+  margin: 39px 33px 30px 33px;
   display: flex;
   justify-content: space-between;
 `;

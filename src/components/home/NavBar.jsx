@@ -1,41 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NavExplore from "../../images/nav-explore.svg";
 import NavSpaces from "../../images/nav-spaces.svg";
 import NavReviews from "../../images/nav-reviews.svg";
 import NavProfile from "../../images/nav-profile.svg";
 
-const NavBar = ({ navIndex }) => {
-  const [selectedNav, setSelectedNav] = useState(navIndex || 0);
-
-  useEffect(() => {
-    setSelectedNav(navIndex);
-  }, [navIndex]);
-
-  function handleSelectedNav(navIndex) {
-    setSelectedNav(navIndex);
-  }
+const NavBar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
-    { icon: NavExplore, text: "Explore" },
-    { icon: NavSpaces, text: "Spaces" },
-    { icon: NavReviews, text: "Reviews" },
-    { icon: NavProfile, text: "Profile" },
+    { icon: NavExplore, text: "Explore", path: "/home" },
+    { icon: NavSpaces, text: "Spaces", path: "/spaces" },
+    { icon: NavReviews, text: "Reviews", path: "/reviews" },
+    { icon: NavProfile, text: "Profile", path: "/profile/:userId" },
   ];
 
   return (
     <NavWrapper>
       <NavList>
-        {navItems.map((nav, navIndex) => (
+        {navItems.map((nav, index) => (
           <NavItem
-            key={navIndex}
-            onClick={() => handleSelectedNav(navIndex)}
-            isSelected={selectedNav === navIndex}
+            key={index}
+            onClick={() => navigate(nav.path)}
+            isSelected={location.pathname === nav.path}
           >
-            <IconWrapper isSelected={selectedNav === navIndex}>
+            <IconWrapper isSelected={location.pathname === nav.path}>
               <NavIcon src={nav.icon} />
             </IconWrapper>
-            {selectedNav === navIndex && <NavText>{nav.text}</NavText>}
+            {location.pathname === nav.path && <NavText>{nav.text}</NavText>}
           </NavItem>
         ))}
       </NavList>
@@ -47,7 +41,6 @@ export default NavBar;
 
 const NavWrapper = styled.div`
   width: 412px;
-  /* height: 80px; */
   background-color: #f7f3ed;
   position: fixed;
   bottom: 0;
