@@ -4,19 +4,26 @@ import Signup from "./pages/account/Signup";
 import Login from "./pages/account/Login";
 import TestStart from "./pages/test/TestStart";
 import TestPage from "./pages/test/TestPage";
+import TestResult from "./pages/test/TestResult";
 import HomePage from "./pages/home/HomePage";
-import ProfilePage from "./pages/profile/ProfilePage";
 import SpacesPage from "./pages/spaces/SpacesPage";
 import ReviewsPage from "./pages/reviews/ReviewsPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 
 function App() {
   return (
     <div>
       <Routes>
+        {/* account page */}
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+
+        {/* type test page */}
         <Route path="/test/intro" element={<TestStart />} />
         <Route path="/test" element={<TestPage />} />
+        <Route path="/test/result" element={<TestResult />} />
+
+        {/* navbar content page */}
         <Route path="/home" element={<HomePage />} />
         <Route path="/spaces" element={<SpacesPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
