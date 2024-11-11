@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import TravelerIcon from "../../images/icon-type.svg";
+import TypeIcon from "../../images/icon-type.svg";
 import BookmarkIcon from "../../images/icon-bookmark.svg";
 import TripsIcon from "../../images/icon-trips.svg";
 
@@ -9,7 +9,7 @@ const MenuBox = () => {
   return (
     <MenuWrapper>
       <MenuItem to="/test" style={{ borderBottom: "1px solid #F7F7F9" }}>
-        <Icon src={TravelerIcon} alt="Traveler Type Icon" />
+        <Icon src={TypeIcon} alt="Traveler Type Icon" />
         <MenuText>Traveler type</MenuText>
         <Arrow>&#8250;</Arrow>
       </MenuItem>

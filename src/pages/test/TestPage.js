@@ -40,7 +40,7 @@ const TestPage = () => {
         <div key={currentQuestion.id}>
           <TestTitle>{currentQuestion.question}</TestTitle>
           <TestOptions>
-            {currentQuestion.options.map((option, idx) => (
+            {currentQuestion.options.map((option) => (
               <OptionLabel
                 key={option.id}
                 isSelected={answers[currentQuestion.id] === option.id}

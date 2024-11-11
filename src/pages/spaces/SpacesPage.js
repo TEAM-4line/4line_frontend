@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 
 const ContentBox = styled.div`
   margin: 86px 0px;
-  background: linear-gradient(to bottom, #ff9c00, white);
+  /* background: linear-gradient(to bottom, #ff9c00, white); */
   min-height: 780px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
