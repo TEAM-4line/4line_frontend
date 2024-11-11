@@ -10,7 +10,7 @@ const ReviewsPage = () => {
       <Wrapper>
         <ContentBox>
           <TopBar PageName={"Reviews"} userImg={SampleProfile} />
-          {/* 여기에 내용 추가하시면 됩니다!! */}
+          {/* 세연님 여기에 내용 추가해주시면 됩니다!! */}
           <NavBar />
         </ContentBox>
       </Wrapper>
