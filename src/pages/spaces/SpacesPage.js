@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 import SampleProfile from "../../images/sample-profile.svg";
+import FilterBar from "../../components/spaces/FilterBar";
 
 const SpacesPage = () => {
   return (
@@ -10,6 +11,8 @@ const SpacesPage = () => {
       <Wrapper>
         <ContentBox>
           <TopBar PageName={"Spaces"} userImg={SampleProfile} />
+          <FilterBar />
+
           <NavBar />
         </ContentBox>
       </Wrapper>
