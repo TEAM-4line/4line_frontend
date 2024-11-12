@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
-import CategoryZone from "../../components/home/CategoryZone";
+import CategoryBar from "../../components/home/CategoryBar";
 import SampleProfile from "../../images/sample-profile.svg";
 import TypeLion from "../../images/type-lion.svg";
 import TopReview from "../../components/home/TopReview";
@@ -35,7 +35,7 @@ const HomePage = () => {
           </UserInfo>
           <TypeImg src={userInfo.typeImg} alt="유저 타입 이미지" />
         </UserBox>
-        <CategoryZone />
+        <CategoryBar />
         <TopReviewBox>
           <TitleBox>
             <Title>Top Reviews</Title>
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentBox = styled.div`
-  margin: 80px 0px;
+  margin: 86px 0px;
   background: linear-gradient(to bottom, #ff9c00, white);
   min-height: 780px;
   overflow-y: scroll;

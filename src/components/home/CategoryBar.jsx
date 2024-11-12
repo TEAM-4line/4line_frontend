@@ -7,7 +7,7 @@ import CatType from "../../images/category-cat.png";
 import DolphinType from "../../images/category-dolphin.png";
 import FoxType from "../../images/category-fox.png";
 
-const CategoryZone = () => {
+const CategoryBar = () => {
   return (
     <div>
       <CategoryWrapper>
@@ -28,7 +28,7 @@ const CategoryZone = () => {
   );
 };
 
-export default CategoryZone;
+export default CategoryBar;
 
 const CategoryWrapper = styled.div`
   margin-bottom: 30px;
