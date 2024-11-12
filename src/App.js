@@ -9,6 +9,7 @@ import HomePage from "./pages/home/HomePage";
 import SpacesPage from "./pages/spaces/SpacesPage";
 import ReviewsPage from "./pages/reviews/ReviewsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import SpacesWritePost from "./pages/spaces/SpacesWritePost";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         {/* navbar content page */}
         <Route path="/home" element={<HomePage />} />
         <Route path="/spaces" element={<SpacesPage />} />
+        <Route path="/spaces/write" element={<SpacesWritePost />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
