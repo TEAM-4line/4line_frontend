@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentBox = styled.div`
-  margin: 80px 0px;
+  margin: 86px 0px;
   background: linear-gradient(to bottom, #ff9c00, white);
   min-height: 780px;
   overflow-y: scroll;
