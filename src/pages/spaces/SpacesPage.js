@@ -1,12 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
-import NavBar from "../../components/home/NavBar";
-import SampleProfile from "../../images/sample-profile.svg";
 import FilterBar from "../../components/spaces/FilterBar";
 import SpacesPost from "../../components/spaces/SpacesPost";
+import NavBar from "../../components/home/NavBar";
+import SampleProfile from "../../images/sample-profile.svg";
+import WriteBtn from "../../images/write-btn.png";
 
 const SpacesPage = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <Wrapper>
@@ -17,6 +20,13 @@ const SpacesPage = () => {
             <SpacesPost />
           </PostWrapper>
         </ContentBox>
+        <BtnBox>
+          <Write
+            src={WriteBtn}
+            alt="write button"
+            onClick={() => navigate("/spaces/write")}
+          />
+        </BtnBox>
         <NavBar />
       </Wrapper>
     </div>
@@ -48,4 +58,15 @@ const PostWrapper = styled.div`
   flex-direction: column;
   gap: 16px;
   /* background: linear-gradient(to bottom, #ff9c00, white); */
+`;
+
+const BtnBox = styled.div`
+  position: fixed;
+  bottom: 96px;
+  right: 530px;
+`;
+const Write = styled.img`
+  width: 66px;
+  height: 66px;
+  cursor: pointer;
 `;

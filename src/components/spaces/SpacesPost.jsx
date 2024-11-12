@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import SampleProfile from "../../images/sample-profile.svg";
-import FollowIcon from "../../images/follow-icon.svg";
+import FollowIcon from "../../images/follow-icon.png";
 
 const SpacesPost = () => {
   const postData = [
