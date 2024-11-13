@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AccountInput from "../../components/common/AccountInput";
 import OrangeBtn from "../../components/common/OrangeBtn";
+import axios from "axios";
 
 const Login = () => {
+  const Server_IP = process.env.REACT_APP_Server_IP;
+  const navigate = useNavigate();
+
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -25,12 +30,23 @@ const Login = () => {
     } else if (!isPassword) {
       return alert("비밀번호를 입력해주세요.");
     } else {
-      alert("안녕하세요, 김멋사님!");
-      console.log(formValue);
-      setFormValue({
-        email: "",
-        password: "",
-      });
+      axios
+        .post(`${Server_IP}/users/login/`, formValue)
+        .then((response) => {
+          console.log(response);
+          alert("로그인 성공!");
+          navigate("/home");
+        })
+        .catch((error) => {
+          if (!error.response) {
+            console.log(error);
+            alert("서버 연결 실패");
+          } else {
+            console.log(error);
+            console.log(error.response.data);
+            alert("응답 오류");
+          }
+        });
     }
   };
 

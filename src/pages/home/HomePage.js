@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 import CategoryBar from "../../components/home/CategoryBar";
 import SampleProfile from "../../images/sample-profile.svg";
@@ -11,13 +10,12 @@ const HomePage = () => {
   const userInfo = {
     profileImg: SampleProfile,
     username: "김멋사",
-    usertype: "호기심 많은 탐험가 원숭이,",
+    usertype: "용맹한 모험가 사자,",
     typeImg: TypeLion,
   };
 
   return (
     <Wrapper>
-      <TopBar userImg={userInfo.profileImg} PageName={"Home"} />
       <ContentBox>
         <UserBox>
           <UserInfo>
@@ -58,7 +56,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentBox = styled.div`
-  margin: 86px 0px;
+  margin-bottom: 86px;
   background: linear-gradient(to bottom, #ff9c00, white);
   min-height: 780px;
   overflow-y: scroll;
@@ -83,7 +81,7 @@ const UserInfo = styled.div`
 `;
 
 const UserType = styled.div`
-  font-size: 20px;
+  font-size: 23px;
   width: 224px;
   color: white;
   font-weight: 600;
@@ -100,8 +98,8 @@ const UserName = styled.div`
 `;
 
 const SubText = styled.div`
-  font-size: 17px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: bolder;
   color: white;
   line-height: 1.4;
 `;

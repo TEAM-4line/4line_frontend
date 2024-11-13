@@ -4,13 +4,14 @@ import questionsData from "../../dummy/TestData.json";
 import ProgressBar from "../../components/test/ProgressBar";
 
 const TestPage = () => {
+  // const Server_IP = process.env.REACT_APP_Server_IP;
   const [answers, setAnswers] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const handleOptionClick = (questionId, optionId) => {
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [questionId]: optionId, // 선택된 옵션의 id만 저장
+      [questionId]: optionId,
     }));
   };
 
@@ -24,8 +25,31 @@ const TestPage = () => {
     if (currentQuestionIndex < questionsData.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      console.log("유형테스트 결과 데이터:", answers);
       alert("테스트가 완료되었습니다!");
+      const requestBody = {
+        travel_style: answers[1],
+        transportation: answers[2],
+        cafe_wait_time: answers[3],
+        luggage_amount: answers[4],
+        route_preference: answers[5],
+        sea_discovery: answers[6],
+        dinner_choice: answers[7],
+        first_stop: answers[8],
+        budget_approach: answers[9],
+        trip_planning_style: answers[10],
+      };
+      console.log(requestBody);
+
+      // axios
+      // .post(`${Server_IP}/type/test/`, requestBody)
+      // .then((response) => {
+      //   console.log("성공적으로 전송:", response.data);
+      //   alert("테스트가 완료되었습니다!");
+      // })
+      // .catch((error) => {
+      //   console.error("전송 중 오류 발생:", error);
+      //   alert("결과 전송에 실패했습니다.");
+      // });
     }
   };
 

@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import ResultDescription from "../../components/test/ResultDescription";
 
 const TestResult = () => {
+  //   const [userType, setUserType] = useState("");
+
+  //   useEffect(() => {
+  //     const getProfile = () => {
+  //       axios
+  //         .get(`${Server_IP}/test/re/`, {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         })
+  //         .then((response) => {
+  //           // console.log(response.data);
+  //           setInfo(response.data);
+  //         })
+  //         .catch((error) => {
+  //           // console.log(mentorId);
+  //           console.log(error);
+  //         });
+  //     };
+  //     getProfile();
+  //   }, [accessToken, mentorId]);
+
   return (
     <div>
-      <Wrapper></Wrapper>
+      <Wrapper>
+        <ResultDescription />
+      </Wrapper>
     </div>
   );
 };

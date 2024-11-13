@@ -1,11 +1,10 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackBtn from "../../images/back-btn.svg";
 
 const TopBar = ({ userImg, PageName }) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <div>
@@ -13,16 +12,17 @@ const TopBar = ({ userImg, PageName }) => {
         <BackBtnBox
           src={BackBtn}
           alt="뒤로가기 버튼"
-          style={{
-            visibility: location.pathname === "/home" ? "hidden" : "visible",
-          }}
+          // style={{
+          //   visibility: location.pathname === "/home" ? "hidden" : "visible",
+          // }}
           onClick={() => navigate(-1)}
         />
         <TopTitle>{PageName}</TopTitle>
         <UserImg
           src={userImg}
           alt="샘플 프로필 이미지"
-          onClick={() => navigate("/profile/:userId")}
+          style={{ visibility: "hidden" }}
+          // onClick={() => navigate(`/profile/${userId}`)}
         />
       </TopWrapper>
     </div>
