@@ -6,7 +6,7 @@ import NavSpaces from "../../images/nav-spaces.svg";
 import NavReviews from "../../images/nav-reviews.svg";
 import NavProfile from "../../images/nav-profile.svg";
 
-const NavBar = () => {
+const NavBar = ({ userId }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,8 +14,11 @@ const NavBar = () => {
     { icon: NavExplore, text: "Explore", path: "/home" },
     { icon: NavSpaces, text: "Spaces", path: "/spaces" },
     { icon: NavReviews, text: "Reviews", path: "/reviews" },
-    { icon: NavProfile, text: "Profile", path: "/profile/:userId" },
+    { icon: NavProfile, text: "Profile", path: `/profile/${userId}` },
   ];
+
+  // `location.pathname`이 `nav.path`를 포함하는지 확인
+  const isPathSelected = (navPath) => location.pathname.startsWith(navPath);
 
   return (
     <NavWrapper>
@@ -24,12 +27,12 @@ const NavBar = () => {
           <NavItem
             key={index}
             onClick={() => navigate(nav.path)}
-            isSelected={location.pathname === nav.path}
+            isSelected={isPathSelected(nav.path)}
           >
-            <IconWrapper isSelected={location.pathname === nav.path}>
+            <IconWrapper isSelected={isPathSelected(nav.path)}>
               <NavIcon src={nav.icon} />
             </IconWrapper>
-            {location.pathname === nav.path && <NavText>{nav.text}</NavText>}
+            {isPathSelected(nav.path) && <NavText>{nav.text}</NavText>}
           </NavItem>
         ))}
       </NavList>

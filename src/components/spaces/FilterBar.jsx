@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const FilterBar = () => {
-  const [selectedFilter, setSelectedFilter] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("lion");
 
   const handleFilter = (btnId) => {
     if (selectedFilter !== btnId) {

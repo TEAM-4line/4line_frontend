@@ -7,6 +7,8 @@ import TestPage from "./pages/test/TestPage";
 import TestResult from "./pages/test/TestResult";
 import HomePage from "./pages/home/HomePage";
 import SpacesPage from "./pages/spaces/SpacesPage";
+import SpacesWrite from "./pages/spaces/SpacesWrite";
+import SpacesDetail from "./pages/spaces/SpacesDetail";
 import ReviewsPage from "./pages/reviews/ReviewsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 
@@ -24,9 +26,18 @@ function App() {
         <Route path="/test/result" element={<TestResult />} />
 
         {/* navbar content page */}
+        {/* Nav - explore */}
         <Route path="/home" element={<HomePage />} />
+
+        {/* Nav - Spaces */}
         <Route path="/spaces" element={<SpacesPage />} />
+        <Route path="/spaces/write" element={<SpacesWrite />} />
+        <Route path="/spaces/detail/:id" element={<SpacesDetail />} />
+
+        {/* Nav - Reviews */}
         <Route path="/reviews" element={<ReviewsPage />} />
+
+        {/* Nav - Profile */}
         <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
     </div>

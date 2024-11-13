@@ -8,7 +8,7 @@ const Signup = () => {
   const [birth, setBirth] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [introduce, setIntroduce] = useState("");
+  const [intro, setIntro] = useState("");
 
   const onChangeName = (e) => {
     setName(e.target.value);
@@ -23,7 +23,7 @@ const Signup = () => {
     setPassword(e.target.value);
   };
   const onChangeIntro = (e) => {
-    setIntroduce(e.target.value);
+    setIntro(e.target.value);
   };
 
   return (
@@ -85,7 +85,7 @@ const Signup = () => {
         <LoginInput
           id="introduce"
           name="introduce"
-          value={introduce}
+          value={intro}
           onChange={onChangeIntro}
           type="text"
           placeholder="나만의 한 줄 소개를 입력해주세요"
