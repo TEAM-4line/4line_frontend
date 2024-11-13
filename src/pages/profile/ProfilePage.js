@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 
 const ContentBox = styled.div`
   margin: 86px 0px;
-  min-height: 780px;
+  min-height: 550px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
