@@ -1,55 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useState } from "react";
+import AccountInput from "../../components/common/AccountInput";
 import OrangeBtn from "../../components/common/OrangeBtn";
 
-const Signup = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = () => {
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
 
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
-  const onchangePassword = (e) => {
-    setPassword(e.target.value);
+  const isEmail = Boolean(formValue.email);
+  const isPassword = Boolean(formValue.password);
+
+  const handleLogin = () => {
+    if (!isEmail) {
+      return alert("이메일을 입력해 주세요!");
+    } else if (!isPassword) {
+      return alert("비밀번호를 입력해 주세요");
+    } else {
+      alert("안녕하세요, 김멋사님!");
+      console.log(formValue);
+      setFormValue({
+        email: "",
+        password: "",
+      });
+    }
   };
 
   return (
-    <div>
-      <Wrapper>
-        <Txt>로그인</Txt>
-        <form>
-          <InputTitle>이메일</InputTitle>
-          <LoginInput
-            id="email"
-            name="email"
-            value={email}
-            onChange={onChangeEmail}
-            type="email"
-            placeholder="이메일을 입력해주세요"
-          />
-          <InputTitle>비밀번호</InputTitle>
-          <LoginInput
-            id="password"
-            name="password"
-            value={password}
-            onChange={onchangePassword}
-            type="password"
-            placeholder="비밀번호를 입력해주세요"
-          />
-        </form>
-        <BtnContainer>
-          <OrangeBtn txt={"로그인"} />
-        </BtnContainer>
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <Txt>로그인</Txt>
+      <FormContainer>
+        <AccountInput
+          id="email"
+          name="email"
+          inputTitle="이메일"
+          value={formValue.email}
+          onChange={handleChange}
+          type="email"
+          placeholder="이메일을 입력해주세요"
+        />
+        <AccountInput
+          id="password"
+          name="password"
+          inputTitle="비밀번호"
+          value={formValue.password}
+          onChange={handleChange}
+          type="password"
+          placeholder="비밀번호를 입력해주세요"
+        />
+      </FormContainer>
+      <BtnContainer>
+        <OrangeBtn txt="로그인" onBtnClick={handleLogin} />
+      </BtnContainer>
+    </Wrapper>
   );
 };
 
-export default Signup;
+export default Login;
 
 const Wrapper = styled.div`
   width: 412px;
+  min-height: 780px;
   margin: 0 auto;
   box-sizing: border-box;
 `;
@@ -60,29 +79,12 @@ const Txt = styled.div`
   padding: 60px 0px 65px 27px;
 `;
 
-const InputTitle = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  color: var(--grey);
-  padding: 0px 27px;
-  margin-bottom: 10px;
-`;
-
-const LoginInput = styled.input`
-  font-size: 16px;
-  width: 356px;
-  height: 65px;
-  border-radius: 10px;
-  border: 1px solid #eeeeee;
-  padding: 0px 20px;
-  margin: 0px 27px 40px 27px;
-  outline: none;
-  &:focus {
-    outline: 1px solid var(--orange);
-    box-shadow: 15px 15px 20px 0px rgba(211, 209, 216, 0.25);
-  }
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 `;
 
 const BtnContainer = styled.div`
-  margin: 180px 27px 10px 27px;
+  margin: 230px 27px 40px 27px;
 `;
