@@ -21,9 +21,9 @@ const Login = () => {
 
   const handleLogin = () => {
     if (!isEmail) {
-      return alert("이메일을 입력해 주세요!");
+      return alert("이메일을 입력해주세요.");
     } else if (!isPassword) {
-      return alert("비밀번호를 입력해 주세요");
+      return alert("비밀번호를 입력해주세요.");
     } else {
       alert("안녕하세요, 김멋사님!");
       console.log(formValue);
