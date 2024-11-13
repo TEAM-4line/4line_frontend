@@ -60,7 +60,7 @@ const Signup = () => {
     if (!isFilled) {
       return alert("입력하지 않은 정보가 있습니다.");
     } else if (!isEmail) {
-      return alert("이메일 형식이 맞지 않습니다.");
+      return alert("이메일 형식이 올바르지 않습니다.");
     } else if (!isConfirmPwd) {
       return alert("비밀번호가 일치하지 않습니다.");
     } else {
