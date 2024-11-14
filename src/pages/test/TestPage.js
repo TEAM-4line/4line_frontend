@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import questionsData from "../../dummy/TestData.json";
 import ProgressBar from "../../components/test/ProgressBar";
+import axios from "axios";
 
 const TestPage = () => {
-  // const Server_IP = process.env.REACT_APP_Server_IP;
+  const Server_IP = process.env.REACT_APP_Server_IP;
   const [answers, setAnswers] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -40,16 +41,16 @@ const TestPage = () => {
       };
       console.log(requestBody);
 
-      // axios
-      // .post(`${Server_IP}/type/test/`, requestBody)
-      // .then((response) => {
-      //   console.log("성공적으로 전송:", response.data);
-      //   alert("테스트가 완료되었습니다!");
-      // })
-      // .catch((error) => {
-      //   console.error("전송 중 오류 발생:", error);
-      //   alert("결과 전송에 실패했습니다.");
-      // });
+      axios
+        .post(`${Server_IP}/api/question/test/`, requestBody)
+        .then((response) => {
+          console.log("성공적으로 전송:", response.data);
+          alert("테스트가 완료되었습니다!");
+        })
+        .catch((error) => {
+          console.error("전송 중 오류 발생:", error);
+          alert("결과 전송에 실패했습니다.");
+        });
     }
   };
 

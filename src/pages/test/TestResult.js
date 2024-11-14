@@ -11,7 +11,7 @@ const TestResult = () => {
   //   useEffect(() => {
   //     const getProfile = () => {
   //       axios
-  //         .get(`${Server_IP}/test/result/`, {
+  //         .get(`${Server_IP}/api/question/test/${id}/`, {
   //           headers: {
   //             Authorization: `Bearer ${accessToken}`,
   //           },

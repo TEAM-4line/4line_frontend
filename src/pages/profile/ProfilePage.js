@@ -14,6 +14,8 @@ const ProfilePage = () => {
     intro: "안녕하세요. 저는 멋사입니다.",
   };
 
+  //   /api/users/profile/?name=<str:name>
+
   return (
     <div>
       <Wrapper>

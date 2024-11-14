@@ -31,11 +31,20 @@ const Login = () => {
       return alert("비밀번호를 입력해주세요.");
     } else {
       axios
-        .post(`${Server_IP}/users/login/`, formValue)
+        .post(`${Server_IP}/api/users/login/`, formValue)
         .then((response) => {
           console.log(response);
           alert("로그인 성공!");
-          navigate("/home");
+          const userInfo = response.data;
+          //localStorage.setItem("access", userInfo.access);
+          localStorage.setItem("id", userInfo.id);
+          localStorage.setItem("name", userInfo.name);
+          // localStorage.setItem("trip_type", userInfo.trip_type);
+          if (userInfo.trip_type === null) {
+            navigate("/test/intro");
+          } else {
+            navigate("/home");
+          }
         })
         .catch((error) => {
           if (!error.response) {

@@ -11,9 +11,9 @@ const Signup = () => {
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState({
     name: "",
-    birth_date: "",
+    birth: "",
     email: "",
-    password1: "",
+    password: "",
     password2: "",
     intro: "",
   });
@@ -45,7 +45,7 @@ const Signup = () => {
 
     // 비밀번호 확인 검사
     if (name === "password2") {
-      if (formValue.password1 !== value) {
+      if (formValue.password !== value) {
         setConfirmPwdMessage("비밀번호와 비밀번호 확인이 같지 않습니다.");
         setIsConfirmPwd(false);
       } else {
@@ -57,9 +57,9 @@ const Signup = () => {
 
   const isFilled =
     Boolean(formValue.name) &&
-    Boolean(formValue.birth_date) &&
+    Boolean(formValue.birth) &&
     Boolean(formValue.email) &&
-    Boolean(formValue.password1) &&
+    Boolean(formValue.password) &&
     Boolean(formValue.password2) &&
     Boolean(formValue.intro);
 
@@ -72,7 +72,7 @@ const Signup = () => {
       return alert("비밀번호가 일치하지 않습니다.");
     } else {
       axios
-        .post(`${Server_IP}/users/signup/`, formValue)
+        .post(`${Server_IP}/api/users/signup/`, formValue)
         .then((response) => {
           console.log(response);
           alert("회원가입이 완료되었습니다!");
@@ -111,10 +111,10 @@ const Signup = () => {
             placeholder="김멋사"
           />
           <AccountInput
-            id="birth_date"
-            name="birth_date"
+            id="birth"
+            name="birth"
             inputTitle="생년월일"
-            value={formValue.birth_date}
+            value={formValue.birth}
             onChange={handleChange}
             type="date"
             placeholder="생년월일"
@@ -130,10 +130,10 @@ const Signup = () => {
           />
           {!isEmail && <ErrorMessage>{emailMessage}</ErrorMessage>}
           <AccountInput
-            id="password1"
-            name="password1"
+            id="password"
+            name="password"
             inputTitle="비밀번호"
-            value={formValue.password1}
+            value={formValue.password}
             onChange={handleChange}
             type="password"
             placeholder="비밀번호 입력"
