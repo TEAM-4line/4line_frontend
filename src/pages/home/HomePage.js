@@ -1,23 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 import CategoryBar from "../../components/home/CategoryBar";
-import SampleProfile from "../../images/sample-profile.svg";
-import TypeLion from "../../images/type-lion.svg";
 import TopReview from "../../components/home/TopReview";
+import TypeImg from "../../components/home/TypeImg";
 
 const HomePage = () => {
+  const [type, setType] = useState("owl");
   const userInfo = {
-    profileImg: SampleProfile,
     username: "김멋사",
-    usertype: "호기심 많은 탐험가 원숭이,",
-    typeImg: TypeLion,
+    usertype: "용맹한 모험가 사자,",
+    typeImg: type,
   };
 
   return (
     <Wrapper>
-      <TopBar userImg={userInfo.profileImg} PageName={"Home"} />
       <ContentBox>
         <UserBox>
           <UserInfo>
@@ -33,7 +30,7 @@ const HomePage = () => {
               여행하시겠습니까?
             </SubText>
           </UserInfo>
-          <TypeImg src={userInfo.typeImg} alt="유저 타입 이미지" />
+          <TypeImg type={userInfo.typeImg} />
         </UserBox>
         <CategoryBar />
         <TopReviewBox>
@@ -58,7 +55,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentBox = styled.div`
-  margin: 86px 0px;
+  margin-bottom: 86px;
   background: linear-gradient(to bottom, #ff9c00, white);
   min-height: 780px;
   overflow-y: scroll;
@@ -83,7 +80,7 @@ const UserInfo = styled.div`
 `;
 
 const UserType = styled.div`
-  font-size: 20px;
+  font-size: 23px;
   width: 224px;
   color: white;
   font-weight: 600;
@@ -100,15 +97,10 @@ const UserName = styled.div`
 `;
 
 const SubText = styled.div`
-  font-size: 17px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: bolder;
   color: white;
   line-height: 1.4;
-`;
-
-const TypeImg = styled.img`
-  height: 164px;
-  border-radius: 100px;
 `;
 
 const TopReviewBox = styled.div`

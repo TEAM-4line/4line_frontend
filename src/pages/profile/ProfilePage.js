@@ -7,19 +7,26 @@ import SampleProfile from "../../images/sample-profile.svg";
 import profileCircle from "../../images/profile-circle.svg";
 
 const ProfilePage = () => {
+  const userInfo = {
+    name: "김멋사",
+    profile: profileCircle,
+    email: "mutsa@mutsa.com",
+    intro: "안녕하세요. 저는 멋사입니다.",
+  };
+
   return (
     <div>
       <Wrapper>
         <ContentBox>
           <TopBar PageName={"Profile"} userImg={SampleProfile} />
           <InfoBox>
-            <UserImg src={profileCircle} />
-            <UserName>Mutsa</UserName>
-            <UserEmail>mutsa@mutsa.com</UserEmail>
+            <UserImg src={userInfo.profile} />
+            <UserName>{userInfo.name}</UserName>
+            <UserEmail>{userInfo.email}</UserEmail>
           </InfoBox>
           <IntroBox>
             <IntroTitle>I travel like a...</IntroTitle>
-            <IntroText>Growling lion ddddddddddddddddddddd🦁</IntroText>
+            <IntroText>{userInfo.intro}</IntroText>
           </IntroBox>
           <MenuBox />
           <NavBar />

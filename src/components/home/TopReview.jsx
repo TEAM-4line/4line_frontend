@@ -23,22 +23,6 @@ const TopReview = () => {
       likes: 1116,
       bookmarks: 51,
     },
-    {
-      id: 3,
-      image: SampleImg,
-      title: "Another A+ tour",
-      location: "Banff, Canada",
-      likes: 1116,
-      bookmarks: 51,
-    },
-    {
-      id: 4,
-      image: SampleImg,
-      title: "Another A+ tour",
-      location: "Banff, Canada",
-      likes: 1116,
-      bookmarks: 51,
-    },
   ];
 
   return (

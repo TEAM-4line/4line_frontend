@@ -15,6 +15,7 @@ const NavBar = ({ userId }) => {
     { icon: NavSpaces, text: "Spaces", path: "/spaces" },
     { icon: NavReviews, text: "Reviews", path: "/reviews" },
     { icon: NavProfile, text: "Profile", path: `/profile/${userId}` },
+    // { icon: NavProfile, text: "Profile", path: `/profile/:userId` },
   ];
 
   // `location.pathname`이 `nav.path`를 포함하는지 확인
