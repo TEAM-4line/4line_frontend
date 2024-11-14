@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/home/NavBar";
 import CategoryBar from "../../components/home/CategoryBar";
-import SampleProfile from "../../images/sample-profile.svg";
-import TypeLion from "../../images/type-lion.svg";
 import TopReview from "../../components/home/TopReview";
+import TypeImg from "../../components/home/TypeImg";
 
 const HomePage = () => {
+  const [type, setType] = useState("owl");
   const userInfo = {
-    profileImg: SampleProfile,
     username: "김멋사",
     usertype: "용맹한 모험가 사자,",
-    typeImg: TypeLion,
+    typeImg: type,
   };
 
   return (
@@ -31,7 +30,7 @@ const HomePage = () => {
               여행하시겠습니까?
             </SubText>
           </UserInfo>
-          <TypeImg src={userInfo.typeImg} alt="유저 타입 이미지" />
+          <TypeImg type={userInfo.typeImg} />
         </UserBox>
         <CategoryBar />
         <TopReviewBox>
@@ -102,11 +101,6 @@ const SubText = styled.div`
   font-weight: bolder;
   color: white;
   line-height: 1.4;
-`;
-
-const TypeImg = styled.img`
-  height: 164px;
-  border-radius: 100px;
 `;
 
 const TopReviewBox = styled.div`

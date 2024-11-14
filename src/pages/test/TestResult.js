@@ -1,34 +1,45 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ResultDescription from "../../components/test/ResultDescription";
+import ArrowBtn from "../../components/common/ArrowBtn";
 
 const TestResult = () => {
-  //   const [userType, setUserType] = useState("");
+  const navigate = useNavigate();
+  const [type, setType] = useState("monkey");
 
   //   useEffect(() => {
   //     const getProfile = () => {
   //       axios
-  //         .get(`${Server_IP}/test/re/`, {
+  //         .get(`${Server_IP}/test/result/`, {
   //           headers: {
   //             Authorization: `Bearer ${accessToken}`,
   //           },
   //         })
   //         .then((response) => {
   //           // console.log(response.data);
-  //           setInfo(response.data);
+  //           setType(response.data);
   //         })
   //         .catch((error) => {
-  //           // console.log(mentorId);
   //           console.log(error);
   //         });
   //     };
   //     getProfile();
-  //   }, [accessToken, mentorId]);
+  //   }, [accessToken]);
 
   return (
     <div>
       <Wrapper>
-        <ResultDescription />
+        <ResultDescription type={type} />
+        <TextBox>
+          <WithText>그럼 동행을 만나러 가볼까요?</WithText>
+        </TextBox>
+        <BtnBox>
+          <ArrowBtn
+            txt={"여행 시작하기"}
+            onBtnClick={() => navigate("/home")}
+          />
+        </BtnBox>
       </Wrapper>
     </div>
   );
@@ -40,5 +51,21 @@ const Wrapper = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   background: linear-gradient(to bottom, var(--orange), white);
-  padding: 109px 27px 60px 27px;
+  padding: 42px 22px 98px 22px;
+`;
+
+const TextBox = styled.div`
+  margin-top: 6px;
+`;
+
+const WithText = styled.div`
+  font-size: 16px;
+  color: var(--brown);
+  text-align: center;
+  font-weight: bold;
+`;
+
+const BtnBox = styled.div`
+  margin-top: 14px;
+  margin-left: 5px;
 `;
