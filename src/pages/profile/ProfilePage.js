@@ -29,7 +29,7 @@ const ProfilePage = () => {
             <IntroText>{userInfo.intro}</IntroText>
           </IntroBox>
           <MenuBox />
-          <NavBar />
+          <NavBar pageName={"profile"} />
         </ContentBox>
       </Wrapper>
     </div>

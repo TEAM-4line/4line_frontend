@@ -40,7 +40,7 @@ const HomePage = () => {
           </TitleBox>
           <TopReview />
         </TopReviewBox>
-        <NavBar />
+        <NavBar pageName="home" />
       </ContentBox>
     </Wrapper>
   );

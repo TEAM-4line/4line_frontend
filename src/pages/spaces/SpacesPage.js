@@ -27,7 +27,7 @@ const SpacesPage = () => {
             onClick={() => navigate("/spaces/write")}
           />
         </BtnBox>
-        <NavBar />
+        <NavBar pageName={"spaces"} />
       </Wrapper>
     </div>
   );
