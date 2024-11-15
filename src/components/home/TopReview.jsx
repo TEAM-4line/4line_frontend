@@ -5,39 +5,20 @@ import LocationIcon from "../../images/icon-location.svg";
 import SampleImg from "../../images/review-sample.png";
 import styled from "styled-components";
 
-const TopReview = () => {
-  const ReviewInfo = [
-    {
-      id: 1,
-      image: SampleImg,
-      title: "Another A+ tour",
-      location: "Banff, Canada",
-      likes: 1116,
-      bookmarks: 51,
-    },
-    {
-      id: 2,
-      image: SampleImg,
-      title: "Another A+ tour",
-      location: "Banff, Canada",
-      likes: 1116,
-      bookmarks: 51,
-    },
-  ];
-
+const TopReview = ({ reviews }) => {
   return (
     <div>
-      {ReviewInfo.map((review, index) => (
-        <TopReviewWrapper key={index}>
+      {reviews?.map((review) => (
+        <TopReviewWrapper key={review.id}>
           <Left>
-            <Img src={review.image} />
+            <Img src={review.photo || SampleImg} />
           </Left>
           <Right>
             <Title>{review.title}</Title>
             <IconRow>
-              <IconWithText icon={LocationIcon} text={review.location} />
-              <IconWithText icon={HeartTrue} text={review.likes} />
-              <IconWithText icon={BookmarkTrue} text={review.bookmarks} />
+              <IconWithText icon={LocationIcon} text={review.region} />
+              <IconWithText icon={HeartTrue} text={review.like_count} />
+              <IconWithText icon={BookmarkTrue} text={review.scrap_count} />
             </IconRow>
           </Right>
         </TopReviewWrapper>
@@ -48,13 +29,12 @@ const TopReview = () => {
 
 const IconWithText = ({ icon, text }) => (
   <IconTextWrapper>
-    <Icon src={icon} alt="" />
+    <Icon src={icon} alt="아이콘" />
     <Text>{text}</Text>
   </IconTextWrapper>
 );
 
 export default TopReview;
-
 const TopReviewWrapper = styled.div`
   display: flex;
   flex-direction: row;

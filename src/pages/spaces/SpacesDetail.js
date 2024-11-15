@@ -61,7 +61,7 @@ const SpacesDetail = () => {
         ))}
       </ContentContainer>
       <CommentInput />
-      <NavBar />
+      <NavBar pageName={"spaces"} />
     </Wrapper>
   );
 };

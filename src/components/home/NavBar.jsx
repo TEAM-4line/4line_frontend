@@ -1,39 +1,40 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NavExplore from "../../images/nav-explore.svg";
 import NavSpaces from "../../images/nav-spaces.svg";
 import NavReviews from "../../images/nav-reviews.svg";
 import NavProfile from "../../images/nav-profile.svg";
 
-const NavBar = ({ userId }) => {
+const NavBar = ({ pageName }) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const name = localStorage.getItem("name");
 
   const navItems = [
-    { icon: NavExplore, text: "Explore", path: "/home" },
-    { icon: NavSpaces, text: "Spaces", path: "/spaces" },
-    { icon: NavReviews, text: "Reviews", path: "/reviews" },
-    { icon: NavProfile, text: "Profile", path: `/profile/${userId}` },
-    // { icon: NavProfile, text: "Profile", path: `/profile/:userId` },
+    { icon: NavExplore, text: "Explore", path: "/home", keyword: "home" },
+    { icon: NavSpaces, text: "Spaces", path: "/spaces", keyword: "spaces" },
+    { icon: NavReviews, text: "Reviews", path: "/reviews", keyword: "reviews" },
+    {
+      icon: NavProfile,
+      text: "Profile",
+      path: `/profile/${name}`,
+      keyword: "profile",
+    },
   ];
-
-  // `location.pathname`이 `nav.path`를 포함하는지 확인
-  const isPathSelected = (navPath) => location.pathname.startsWith(navPath);
 
   return (
     <NavWrapper>
       <NavList>
         {navItems.map((nav, index) => (
           <NavItem
-            key={index}
+            key={nav.keyword}
             onClick={() => navigate(nav.path)}
-            isSelected={isPathSelected(nav.path)}
+            $isSelected={pageName === nav.keyword}
           >
-            <IconWrapper isSelected={isPathSelected(nav.path)}>
+            <IconWrapper $isSelected={pageName === nav.keyword}>
               <NavIcon src={nav.icon} />
             </IconWrapper>
-            {isPathSelected(nav.path) && <NavText>{nav.text}</NavText>}
+            {pageName === nav.keyword && <NavText>{nav.text}</NavText>}
           </NavItem>
         ))}
       </NavList>
@@ -77,8 +78,8 @@ const IconWrapper = styled.div`
   width: 64px;
   height: 30px;
   border-radius: 15px;
-  background-color: ${({ isSelected }) =>
-    isSelected ? "#f2dfbf" : "transparent"};
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? "#f2dfbf" : "transparent"};
   &:hover {
     background-color: #f2dfbf;
     border-radius: 18px;

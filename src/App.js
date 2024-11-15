@@ -38,7 +38,7 @@ function App() {
         <Route path="/reviews" element={<ReviewsPage />} />
 
         {/* Nav - Profile */}
-        <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/profile/:name" element={<ProfilePage />} />
       </Routes>
     </div>
   );

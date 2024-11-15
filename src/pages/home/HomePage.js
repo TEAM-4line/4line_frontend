@@ -1,17 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/home/NavBar";
 import CategoryBar from "../../components/home/CategoryBar";
 import TopReview from "../../components/home/TopReview";
 import TypeImg from "../../components/home/TypeImg";
+import axios from "axios";
 
 const HomePage = () => {
-  const [type, setType] = useState("owl");
-  const userInfo = {
-    username: "김멋사",
-    usertype: "용맹한 모험가 사자,",
-    typeImg: type,
-  };
+  const [userInfo, setUserInfo] = useState({});
+  const [communityPosts, setCommunityPosts] = useState([]);
+  const Server_IP = process.env.REACT_APP_Server_IP;
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const accresToken = localStorage.getItem("access");
+      try {
+        const response = await axios.get(`${Server_IP}/api/main/`, {
+          headers: {
+            Authorization: `Bearer ${accresToken}`,
+          },
+        });
+        console.log(response.data);
+        setUserInfo({
+          name: response.data.user_info.name,
+          usertype: response.data.user_info.trip_type,
+          typecontent: response.data.user_info.type_content,
+        });
+        setCommunityPosts(response.data.popular_communities);
+        console.log(communityPosts);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUserProfile();
+    // eslint-disable-next-line
+  }, [Server_IP]);
 
   return (
     <Wrapper>
@@ -19,9 +42,9 @@ const HomePage = () => {
         <UserBox>
           <UserInfo>
             <div style={{ lineHeight: 1.4 }}>
-              <UserType>{userInfo.usertype}</UserType>
+              <UserType>{userInfo.typecontent}</UserType>
               <UserName>
-                <span>{userInfo.username}</span>님
+                <span>{userInfo.name}</span>님
               </UserName>
             </div>
             <SubText>
@@ -30,7 +53,7 @@ const HomePage = () => {
               여행하시겠습니까?
             </SubText>
           </UserInfo>
-          <TypeImg type={userInfo.typeImg} />
+          <TypeImg type={userInfo.usertype} />
         </UserBox>
         <CategoryBar />
         <TopReviewBox>
@@ -38,9 +61,9 @@ const HomePage = () => {
             <Title>Top Reviews</Title>
             <ViewAll>View All</ViewAll>
           </TitleBox>
-          <TopReview />
+          <TopReview reviews={communityPosts} />
         </TopReviewBox>
-        <NavBar />
+        <NavBar pageName="home" />
       </ContentBox>
     </Wrapper>
   );

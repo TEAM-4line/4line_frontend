@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LionType from "../../images/category-lion.png";
 import OwlType from "../../images/category-owl.png";
@@ -8,23 +9,45 @@ import DolphinType from "../../images/category-dolphin.png";
 import FoxType from "../../images/category-fox.png";
 
 const CategoryBar = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (filterType) => {
+    navigate(`/spaces?filter=${filterType}`);
+  };
+
   return (
-    <div>
-      <CategoryWrapper>
-        <CategoryBox>
-          <CategoryLeft>
-            <CategoryBtn src={LionType} />
-            <CategoryBtn src={DolphinType} />
-            <CategoryBtn src={MonkeyType} />
-          </CategoryLeft>
-          <CategoryRight>
-            <CategoryBtn src={CatType} />
-            <CategoryBtn src={OwlType} />
-            <CategoryBtn src={FoxType} />
-          </CategoryRight>
-        </CategoryBox>
-      </CategoryWrapper>
-    </div>
+    <CategoryWrapper>
+      <CategoryBox>
+        <CategoryLeft>
+          <CategoryBtn
+            src={LionType}
+            onClick={() => handleCategoryClick("lion")}
+          />
+          <CategoryBtn
+            src={DolphinType}
+            onClick={() => handleCategoryClick("dolphin")}
+          />
+          <CategoryBtn
+            src={MonkeyType}
+            onClick={() => handleCategoryClick("monkey")}
+          />
+        </CategoryLeft>
+        <CategoryRight>
+          <CategoryBtn
+            src={CatType}
+            onClick={() => handleCategoryClick("cat")}
+          />
+          <CategoryBtn
+            src={OwlType}
+            onClick={() => handleCategoryClick("owl")}
+          />
+          <CategoryBtn
+            src={FoxType}
+            onClick={() => handleCategoryClick("fox")}
+          />
+        </CategoryRight>
+      </CategoryBox>
+    </CategoryWrapper>
   );
 };
 
@@ -34,6 +57,7 @@ const CategoryWrapper = styled.div`
   margin-bottom: 30px;
   padding: 0px 33px;
 `;
+
 const CategoryBox = styled.div``;
 
 const CategoryLeft = styled.div`
@@ -41,14 +65,15 @@ const CategoryLeft = styled.div`
   gap: 10px;
   justify-content: left;
 `;
+
 const CategoryRight = styled.div`
   display: flex;
   gap: 13px;
   justify-content: right;
 `;
+
 const CategoryBtn = styled.img`
   cursor: pointer;
   width: 90px;
   height: 90px;
-  /* border: 1px solid var(--orange); */
 `;

@@ -1,36 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ResultDescription from "../../components/test/ResultDescription";
 import ArrowBtn from "../../components/common/ArrowBtn";
+// import axios from "axios";
 
 const TestResult = () => {
   const navigate = useNavigate();
-  const [type, setType] = useState("monkey");
-
-  //   useEffect(() => {
-  //     const getProfile = () => {
-  //       axios
-  //         .get(`${Server_IP}/test/result/`, {
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //           },
-  //         })
-  //         .then((response) => {
-  //           // console.log(response.data);
-  //           setType(response.data);
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     };
-  //     getProfile();
-  //   }, [accessToken]);
+  const trip_type = localStorage.getItem("trip_type");
 
   return (
     <div>
       <Wrapper>
-        <ResultDescription type={type} />
+        <ResultDescription type={trip_type} />
         <TextBox>
           <WithText>그럼 동행을 만나러 가볼까요?</WithText>
         </TextBox>
