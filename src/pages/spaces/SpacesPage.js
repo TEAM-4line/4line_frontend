@@ -10,13 +10,14 @@ import axios from "axios";
 
 const SpacesPage = () => {
   const Server_IP = process.env.REACT_APP_Server_IP;
+  const accessToken = localStorage.getItem("access");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const [selectedFilter, setSelectedFilter] = useState(
     searchParams.get("filter") || "lion"
   );
-  console.log(selectedFilter);
+  //   console.log(selectedFilter);
 
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,12 @@ const SpacesPage = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${Server_IP}/api/accompany/${selectedFilter}/`
+          `${Server_IP}/api/accompany/${selectedFilter}/`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
         );
         setPosts(response.data);
         console.log(response.data);
@@ -44,7 +50,7 @@ const SpacesPage = () => {
       }
     };
     fetchPosts();
-  }, [selectedFilter, Server_IP]);
+  }, [selectedFilter, accessToken, Server_IP]);
 
   const handleFilterSelect = (filterType) => {
     setSelectedFilter(filterType);

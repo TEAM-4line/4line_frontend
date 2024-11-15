@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
@@ -9,6 +10,7 @@ import axios from "axios";
 const SpacesWrite = () => {
   const Server_IP = process.env.REACT_APP_Server_IP;
   const accessToken = localStorage.getItem("access");
+  const navigate = useNavigate();
   const [postValue, setPostValue] = useState({
     age: "",
     travel_area: "",
@@ -41,14 +43,6 @@ const SpacesWrite = () => {
     if (!isFilled) {
       alert("모든 항목을 입력해 주세요");
     } else {
-      alert("게시글이 작성되었습니다.");
-      setPostValue({
-        age: "",
-        travel_area: "",
-        travel_period: "",
-        description: "",
-      });
-      console.log(postValue);
       axios
         .post(`${Server_IP}/api/accompany/`, postValue, {
           headers: {
@@ -56,8 +50,16 @@ const SpacesWrite = () => {
           },
         })
         .then((response) => {
+          alert("게시글이 작성되었습니다.");
+          setPostValue({
+            age: "",
+            travel_area: "",
+            travel_period: "",
+            description: "",
+          });
+          console.log(postValue);
           console.log(response.data);
-          alert("테스트가 완료되었습니다!");
+          navigate(-1);
         })
         .catch((error) => {
           console.error(error);
