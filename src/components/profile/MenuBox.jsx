@@ -8,7 +8,7 @@ import TripsIcon from "../../images/icon-trips.svg";
 const MenuBox = () => {
   return (
     <MenuWrapper>
-      <MenuItem to="/test" style={{ borderBottom: "1px solid #F7F7F9" }}>
+      <MenuItem to="/test/intro" style={{ borderBottom: "1px solid #F7F7F9" }}>
         <Icon src={TypeIcon} alt="Traveler Type Icon" />
         <MenuText>Traveler type</MenuText>
         <Arrow>&#8250;</Arrow>

@@ -15,9 +15,7 @@ const SpacesDetail = () => {
       age: 24,
       travel_area: "하와이",
       travel_period: "5-7일",
-      description:
-        // " 하와이 여행가려고 하는데 같이 여행 동행하실 분 모집합니다! 저는 ~~ 여행 스타일을 추구해서 비슷한 여행 성향이신 분이시면 좋겠습니다!",
-        "동행구해요",
+      description: "동행구해요",
       created_at: "2024-11-05 19:54",
     },
   ];

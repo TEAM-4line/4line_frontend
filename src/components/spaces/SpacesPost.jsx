@@ -6,10 +6,12 @@ import FollowIcon from "../../images/follow-icon.png";
 
 const SpacesPost = ({ posts }) => {
   const navigate = useNavigate();
+  const Server_IP = process.env.REACT_APP_Server_IP;
 
   const handleFollowAlert = () => {
     alert("아직 준비중인 기능입니다!");
   };
+  //   console.log(`${Server_IP}/${posts.profile_image}`);
 
   return (
     <>
@@ -17,7 +19,10 @@ const SpacesPost = ({ posts }) => {
         <PostWrapper key={post.id}>
           <Header>
             <UserSection>
-              <ProfileImage src={post.image} />
+              <ProfileImage
+                src={`${Server_IP}/${post.profile_image}` || SampleProfile}
+                alt="Profile"
+              />
               <Username>{post.user_name}</Username>
             </UserSection>
             <FollowButton src={FollowIcon} onClick={handleFollowAlert} />

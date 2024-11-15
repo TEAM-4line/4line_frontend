@@ -13,7 +13,6 @@ const SpacesPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  // URL에서 필터 값을 읽어 초기 상태 설정
   const [selectedFilter, setSelectedFilter] = useState(
     searchParams.get("filter") || "lion"
   );
@@ -37,15 +36,15 @@ const SpacesPage = () => {
           `${Server_IP}/api/accompany/${selectedFilter}/`
         );
         setPosts(response.data);
-        console.log(posts);
+        console.log(response.data);
       } catch (error) {
-        console.error("Error fetching posts:", error);
+        console.log(error);
       } finally {
         setLoading(false);
       }
     };
     fetchPosts();
-  }, [selectedFilter]);
+  }, [selectedFilter, Server_IP]);
 
   const handleFilterSelect = (filterType) => {
     setSelectedFilter(filterType);
