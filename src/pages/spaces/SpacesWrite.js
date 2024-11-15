@@ -49,7 +49,7 @@ const SpacesWrite = () => {
         description: "",
       });
       axios
-        .post(`${Server_IP}/api/accompany`, postValue, {
+        .post(`${Server_IP}/api/accompany/`, postValue, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

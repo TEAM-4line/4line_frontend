@@ -33,31 +33,35 @@ const TestPage = () => {
     if (currentQuestionIndex < questionsData.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      const requestBody = {
-        id: id,
-        name: name,
-        travel_style: answers[1],
-        transportation: answers[2],
-        cafe_wait_time: answers[3],
-        luggage_amount: answers[4],
-        route_preference: answers[5],
-        sea_discovery: answers[6],
-        dinner_choice: answers[7],
-        first_stop: answers[8],
-        budget_approach: answers[9],
-        trip_planning_style: answers[10],
-      };
+      const requestBody = [
+        {
+          id: parseInt(id),
+          name: name,
+          travel_style: answers[1],
+          transportation: answers[2],
+          cafe_wait_time: answers[3],
+          luggage_amount: answers[4],
+          route_preference: answers[5],
+          sea_discovery: answers[6],
+          dinner_choice: answers[7],
+          first_stop: answers[8],
+          budget_approach: answers[9],
+          trip_planning_style: answers[10],
+        },
+      ];
       console.log(requestBody);
+      console.log(accessToken);
       axios
         .post(`${Server_IP}/api/question/test`, requestBody, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
+            "content-type": "application/json",
           },
         })
         .then((response) => {
           console.log(response.data);
           alert("테스트가 완료되었습니다!");
-          localStorage.setItem("trip_type", response.data.trip_type);
+          localStorage.setItem("trip_type", response.data[0].trip_type);
           navigate("/test/result");
         })
         .catch((error) => {
@@ -180,16 +184,3 @@ const OptionInput = styled.input`
 const BtnBox = styled.div`
   margin: 113px 27px 60px 27px;
 `;
-
-// const NextButton = styled.button`
-//   font-size: 20px;
-//   font-weight: bold;
-//   color: white;
-//   background-color: var(--orange);
-//   border-radius: 20px;
-//   border: none;
-//   cursor: pointer;
-//   width: 357px;
-//   height: 65px;
-//   margin: 113px 27px 90px 27px;
-// `;

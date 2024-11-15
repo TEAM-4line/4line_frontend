@@ -5,10 +5,11 @@ import TopBar from "../../components/home/TopBar";
 import FilterBar from "../../components/spaces/FilterBar";
 import SpacesPost from "../../components/spaces/SpacesPost";
 import NavBar from "../../components/home/NavBar";
-import SampleProfile from "../../images/sample-profile.svg";
 import WriteBtn from "../../images/write-btn.png";
+import axios from "axios";
 
 const SpacesPage = () => {
+  const Server_IP = process.env.REACT_APP_Server_IP;
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -16,30 +17,57 @@ const SpacesPage = () => {
   const [selectedFilter, setSelectedFilter] = useState(
     searchParams.get("filter") || "lion"
   );
+  console.log(selectedFilter);
+
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // URL이 변경되었을 때도 필터 값 업데이트
     const filter = searchParams.get("filter");
     if (filter) {
       setSelectedFilter(filter);
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `${Server_IP}/api/accompany/${selectedFilter}/`
+        );
+        setPosts(response.data);
+        console.log(posts);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, [selectedFilter]);
+
   const handleFilterSelect = (filterType) => {
     setSelectedFilter(filterType);
-    navigate(`/spaces?filter=${filterType}`); // URL 업데이트
+    navigate(`/spaces?filter=${filterType}`);
   };
 
   return (
     <Wrapper>
-      <TopBar PageName={"Spaces"} userImg={SampleProfile} />
+      <TopBar PageName={"Spaces"} userImg={null} />
       <FilterBar
         selectedFilter={selectedFilter}
         onFilterSelect={handleFilterSelect}
       />
       <ContentBox>
         <PostWrapper>
-          <SpacesPost selectedFilter={selectedFilter} />
+          {loading ? (
+            <p>Loading...</p>
+          ) : posts.length > 0 ? (
+            <SpacesPost posts={posts} />
+          ) : (
+            <p>선택된 유형의 게시글이 없습니다.</p>
+          )}
         </PostWrapper>
       </ContentBox>
       <BtnBox>

@@ -4,40 +4,8 @@ import { useNavigate } from "react-router-dom";
 import SampleProfile from "../../images/sample-profile.svg";
 import FollowIcon from "../../images/follow-icon.png";
 
-const SpacesPost = () => {
+const SpacesPost = ({ posts }) => {
   const navigate = useNavigate();
-  const postData = [
-    {
-      id: 1,
-      name: "김멋사",
-      image: SampleProfile,
-      age: 24,
-      travel_area: "하와이",
-      travel_period: "5-7일",
-      description:
-        "하와이 여행가려고 하는데 같이 여행 동행하실 분 모집합니다!저는 ~~ 여행 스타일을 추구해서 비슷한 여행 성향이신 분이시면 좋겠습니다!",
-    },
-    {
-      id: 2,
-      name: "이숙명",
-      image: SampleProfile,
-      age: 30,
-      travel_area: "베트남 다낭",
-      travel_period: "4박 5일",
-      description:
-        "베트남 여행가려고 하는데 같이 여행 동행하실 분 모집합니다! 저는 ~~ 여행 스타일을 추구해서 비슷한 여행 성향이신 분이시면 좋겠습니다!",
-    },
-    {
-      id: 3,
-      name: "김멋사",
-      image: SampleProfile,
-      age: 35,
-      travel_area: "유럽 전반적으로",
-      travel_period: "3주",
-      description:
-        "유럽 전반적으로 가려고 하는데 같이 여행 동행하실 분 모집합니다! 저는 ~~ 여행 스타일을 추구해서 비슷한 여행 성향이신 분이시면 좋겠습니다!",
-    },
-  ];
 
   const handleFollowAlert = () => {
     alert("아직 준비중인 기능입니다!");
@@ -45,12 +13,12 @@ const SpacesPost = () => {
 
   return (
     <>
-      {postData.map((post, idx) => (
-        <PostWrapper key={idx}>
+      {posts?.map((post) => (
+        <PostWrapper key={post.id}>
           <Header>
             <UserSection>
               <ProfileImage src={post.image} />
-              <Username>{post.name}</Username>
+              <Username>{post.user_name}</Username>
             </UserSection>
             <FollowButton src={FollowIcon} onClick={handleFollowAlert} />
           </Header>
