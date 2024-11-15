@@ -29,7 +29,7 @@ const SpacesPost = ({ posts }) => {
             </UserSection>
             <FollowButton src={FollowIcon} onClick={handleFollowAlert} />
           </Header>
-          <Details onClick={() => navigate(`/spaces/detail/:id`)}>
+          <Details onClick={() => navigate(`/spaces/detail/${post.id}`)}>
             <DetailItem>
               <Label># 나이</Label>
               <Value>{post.age}</Value>

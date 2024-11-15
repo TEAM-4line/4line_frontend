@@ -1,62 +1,79 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 import TopBar from "../../components/home/TopBar";
 import CommentInput from "../../components/spaces/CommentInput";
 import NavBar from "../../components/home/NavBar";
 import SampleProfile from "../../images/sample-profile.svg";
 import BannerImg from "../../images/banner-image.png";
+import axios from "axios";
 
 const SpacesDetail = () => {
-  const postInfo = [
-    {
-      id: 1,
-      name: "김멋사",
-      image: SampleProfile,
-      age: 24,
-      travel_area: "하와이",
-      travel_period: "5-7일",
-      description: "동행구해요",
-      created_at: "2024-11-05 19:54",
-    },
-  ];
+  const Server_IP = process.env.REACT_APP_Server_IP;
+  const accessToken = localStorage.getItem("access");
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchDetail = async () => {
+      try {
+        // const response = await axios.get(`${Server_IP}/api/accompany/${id}/`, {
+        const response = await axios.get(`${Server_IP}/api/accompany/`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        const postDetail = response.data.find(
+          (item) => item.id === parseInt(id)
+        );
+        setDetail(postDetail);
+        console.log(postDetail);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDetail();
+  }, [accessToken, Server_IP, id]);
+
+  const profileImageURL = detail.profile_image
+    ? `${Server_IP}/media/${detail.profile_image}`
+    : SampleProfile;
+
   return (
     <Wrapper>
       <TopBar PageName={"Spaces"} userImg={SampleProfile} />
       <ContentContainer>
-        {postInfo.map((post) => (
-          <ContentBox key={post.id}>
-            <AuthorSection>
-              <ProfileImage src={post.image} alt="작성자 프로필" />
-              <AuthorInfo>
-                <AuthorName>{post.name}</AuthorName>
-                <PostDate>{post.created_at}</PostDate>
-              </AuthorInfo>
-            </AuthorSection>
+        <ContentBox>
+          <AuthorSection>
+            <ProfileImage src={profileImageURL} alt="작성자 프로필" />
+            <AuthorInfo>
+              <AuthorName>{detail.user_name}</AuthorName>
+              <PostDate>{detail.created_at}</PostDate>
+            </AuthorInfo>
+          </AuthorSection>
 
-            <InfoSection>
-              <InfoItem>
-                <InfoLabel># 나이</InfoLabel>
-                <InfoValue>{post.age}</InfoValue>
-              </InfoItem>
-              <InfoItem>
-                <InfoLabel># 여행 지역</InfoLabel>
-                <InfoValue>{post.travel_area}</InfoValue>
-              </InfoItem>
-              <InfoItem>
-                <InfoLabel># 여행 기간</InfoLabel>
-                <InfoValue>{post.travel_period}</InfoValue>
-              </InfoItem>
-            </InfoSection>
+          <InfoSection>
+            <InfoItem>
+              <InfoLabel># 나이</InfoLabel>
+              <InfoValue>{detail.age}</InfoValue>
+            </InfoItem>
+            <InfoItem>
+              <InfoLabel># 여행 지역</InfoLabel>
+              <InfoValue>{detail.travel_area}</InfoValue>
+            </InfoItem>
+            <InfoItem>
+              <InfoLabel># 여행 기간</InfoLabel>
+              <InfoValue>{detail.travel_period}</InfoValue>
+            </InfoItem>
+          </InfoSection>
 
-            <PostContent>{post.description}</PostContent>
-            <BannerImage src={BannerImg} alt="banner image" />
+          <PostContent>{detail.description}</PostContent>
+          <BannerImage src={BannerImg} alt="banner image" />
 
-            <CommentSection>
-              <CommentIcon>💬</CommentIcon>
-              <CommentText>첫 댓글을 남겨주세요</CommentText>
-            </CommentSection>
-          </ContentBox>
-        ))}
+          <CommentSection>
+            <CommentIcon>💬</CommentIcon>
+            <CommentText>첫 댓글을 남겨주세요</CommentText>
+          </CommentSection>
+        </ContentBox>
       </ContentContainer>
       <CommentInput />
       <NavBar pageName={"spaces"} />
