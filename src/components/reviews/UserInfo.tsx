@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 interface UserInfoProps {
   username: string;
-  location: string;
+  region: string;
 }
 
-const UserInfo: React.FC<UserInfoProps> = ({ username, location }) => {
+const UserInfo: React.FC<UserInfoProps> = ({ username, region }) => {
   return (
     <UserInfoWrapper>
       <ProfileImg
@@ -18,7 +18,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ username, location }) => {
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/55ae72a1abca4098bc74647503dd0c2ee23c1c6d095561842f35b96081314dda?placeholderIfAbsent=true&apiKey=759653f2ab50441cb226416825bdb2ac"
         alt="arrow icon"
       />
-      <Location>{location}</Location>
+      <Region>{region}</Region>
     </UserInfoWrapper>
   );
 };
@@ -52,7 +52,7 @@ const ArrowIcon = styled.img`
   height: auto; // 원래의 비율 유지
 `;
 
-const Location = styled.span`
+const Region = styled.span`
   font-weight: 500; // 기본 두께 설정
   color: #ffa500; // 감귤색 (오렌지 색상)으로 설정하여 강조
 `;

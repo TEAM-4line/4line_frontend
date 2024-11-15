@@ -12,7 +12,7 @@ const ReviewPage: React.FC = () => {
           <ReviewCard
             avatarSrc="/images/sample-profile.svg"
             name="Mutsa"
-            location="Banff, Canada"
+            // location="Banff, Canada"
             duration="1 week"
             cost="150,000"
             region="North America"
@@ -26,7 +26,7 @@ const ReviewPage: React.FC = () => {
           <ReviewCard
             avatarSrc="/images/sample-profile.svg"
             name="Mutsa"
-            location="Banff, Canada"
+            // location="Banff, Canada"
             duration="1 week"
             cost="150,000"
             region="North America"
@@ -37,7 +37,7 @@ const ReviewPage: React.FC = () => {
             bookmarks={0}
           />
 
-        <NavBar />
+        <NavBar pageName="reviews"/>
       </ContentBox>
     </Wrapper>
   );

@@ -8,7 +8,6 @@ import styled from 'styled-components';
 interface ReviewCardProps {
   avatarSrc: string;
   name: string;
-  location: string;
   duration: string;
   cost: string;
   region: string;
@@ -22,7 +21,6 @@ interface ReviewCardProps {
 const ReviewCard: React.FC<ReviewCardProps> = ({
   avatarSrc,
   name,
-  location,
   duration,
   cost,
   region,
@@ -34,7 +32,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
 }) => {
   return (
     <CardContainer>
-      <UserInfo username={name} location={location} />
+      <UserInfo username={name} region={region} />
       <TravelDetails
         duration={duration}
         cost={cost}

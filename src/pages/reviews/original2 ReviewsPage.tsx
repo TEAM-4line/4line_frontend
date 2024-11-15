@@ -58,7 +58,7 @@ const ReviewsPage: React.FC = () => {
                 key={post.id}
                 avatarSrc={post.avatarSrc}
                 name={post.name}
-                location={post.location}
+                // location={post.location}
                 duration={post.duration}
                 cost={post.cost}
                 region={post.region}

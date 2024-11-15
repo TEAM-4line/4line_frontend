@@ -15,12 +15,13 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
 
   const [showFilter, setShowFilter] = useState(false); // 필터 표시 여부 상태
 
-  const durationOptions = ['day', 'week', 'month'];
-  const costOptions = ['KRW per day', 'USD per day'];
-  const regionOptions = ['Asia', 'South America', 'North America', 'Europe', 'Africa', 'Australia'];
+  const durationOptions = ['일', '주일', '개월'];
+  const costOptions = ['원(₩)', '달러($)'];
+  const regionOptions = ['아시아', '남아메리카', '북아메리카', '유럽', '아프리카', '호주'];
 
   // 검색 핸들러
   const handleSearch = () => {
+    // 상위 컴포넌트에 필터 데이터 전달
     onSearch({ duration, durationUnit, cost, costUnit, region });
   };
 
@@ -30,8 +31,8 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
       <SearchWrapper>
         {/* 검색 아이콘 및 입력란 */}
         <SearchInputWrapper>
-        <SearchIcon src="/images/search.png" alt="Search Icon" />
-        <SearchInput type="text" placeholder="Search for reviews..." />
+          <SearchIcon src="/images/search.png" alt="Search Icon" />
+          <SearchInput type="text" placeholder=" 검색어를 입력하세요" />
         </SearchInputWrapper>
         {/* 필터 버튼 (아이콘으로 대체) */}
         <FilterButton onClick={() => setShowFilter(!showFilter)}>
@@ -43,13 +44,13 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
       {showFilter && (
         <FilterSection>
           <FilterItem>
-            <label>Duration</label>
+            <label>여행 기간</label>
             <InputGroup>
               <FilterInput
                 type="text"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
-                placeholder="e.g., 1"
+                placeholder="예) 1"
               />
               <FilterSelect value={durationUnit} onChange={(e) => setDurationUnit(e.target.value)}>
                 {durationOptions.map((option) => (
@@ -61,13 +62,13 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
             </InputGroup>
           </FilterItem>
           <FilterItem>
-            <label>Cost</label>
+            <label>비용</label>
             <InputGroup>
               <FilterInput
                 type="text"
                 value={cost}
                 onChange={(e) => setCost(e.target.value)}
-                placeholder="e.g., 50,000"
+                placeholder="예) 50,000"
               />
               <FilterSelect value={costUnit} onChange={(e) => setCostUnit(e.target.value)}>
                 {costOptions.map((option) => (
@@ -79,9 +80,9 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
             </InputGroup>
           </FilterItem>
           <FilterItem>
-            <label>Region</label>
+            <label>지역</label>
             <FilterSelect value={region} onChange={(e) => setRegion(e.target.value)}>
-              <option value="">Select Region</option>
+              <option value="">지역을 선택하세요</option>
               {regionOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -89,7 +90,9 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
               ))}
             </FilterSelect>
           </FilterItem>
-          <SearchButton onClick={handleSearch}>Search</SearchButton>
+          <ButtonWrapper>
+            <SearchButton onClick={handleSearch}>Search</SearchButton>
+          </ButtonWrapper>
         </FilterSection>
       )}
     </FilterContainer>
@@ -122,12 +125,14 @@ const SearchInput = styled.input`
   padding: 0.5rem;
   border-radius: 10px 0 0 10px;
   outline: none;
+  height: 40px;
 `;
 
 const FilterButton = styled.button`
   background-color: #fff;
   border: none;
   padding: 0.5rem;
+  padding-right: .7rem;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
   outline: none;
@@ -198,6 +203,13 @@ const SearchIcon = styled.img`
 `;
 
 const FilterIcon = styled.img`
-  width: 15px;
-  height: 12.5px;
+  width: 20px;
+  height: 20px;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 `;
