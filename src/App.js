@@ -11,6 +11,8 @@ import SpacesWrite from "./pages/spaces/SpacesWrite";
 import SpacesDetail from "./pages/spaces/SpacesDetail";
 import ReviewsPage from "./pages/reviews/ReviewsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import ReviewsResult from "./pages/reviews/ReviewsResult";
+import NewReviewPage from "./pages/reviews/NewReviews";
 
 function App() {
   return (
@@ -36,10 +38,11 @@ function App() {
 
         {/* Nav - Reviews */}
         <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/reviews/result" element={<ReviewsResult />} />
+        <Route path="/reviews/new_review" element={<NewReviewPage />} /> 
 
         {/* Nav - Profile */}
-        <Route path="/profile/:name" element={<ProfilePage />} />
-      </Routes>
+        <Route path="/profile/:name" element={<ProfilePage />} />      </Routes>
     </div>
   );
 }

@@ -45,7 +45,8 @@ const NavBar = ({ pageName }) => {
 export default NavBar;
 
 const NavWrapper = styled.div`
-  width: 412px;
+  width: 100%;
+  max-width: 412px;
   background-color: #f7f3ed;
   position: fixed;
   bottom: 0;
