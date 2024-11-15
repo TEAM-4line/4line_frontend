@@ -48,8 +48,9 @@ const SpacesWrite = () => {
         travel_period: "",
         description: "",
       });
+      console.log(postValue);
       axios
-        .post(`${Server_IP}/api/accompany`, postValue, {
+        .post(`${Server_IP}/api/accompany/`, postValue, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

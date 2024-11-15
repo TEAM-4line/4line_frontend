@@ -41,7 +41,7 @@ const Login = () => {
           localStorage.setItem("name", userInfo.name);
           localStorage.setItem("access", userInfo.access);
           localStorage.setItem("refresh", userInfo.refresh);
-          if (userInfo.trip_type === null) {
+          if (userInfo.trip_type === "default_trip_type") {
             navigate("/test/intro");
           } else {
             localStorage.setItem("trip_type", userInfo.trip_type);
