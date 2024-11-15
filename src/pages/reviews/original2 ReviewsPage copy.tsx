@@ -75,7 +75,7 @@ const ReviewsPage: React.FC = () => {
         </PostsSection>
       </ContentWrapper>
       <NavBarContainer>
-        <NavBar />
+        <NavBar pageName="reviews"/>
       </NavBarContainer>
     </PageWrapper>
   );

@@ -57,7 +57,7 @@ const ReviewsPage: React.FC = () => {
         </FilterSection>
       </ContentWrapper>
       <NavBarContainer>
-        <NavBar />
+        <NavBar pageName="reviews"/>
       </NavBarContainer>
     </PageWrapper>
   );

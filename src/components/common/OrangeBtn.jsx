@@ -29,9 +29,10 @@ const OrangeBtn = ({
 export default OrangeBtn;
 
 const ButtonBox = styled.button`
+  font-family: "pretendard";
   background-color: var(--orange);
   width: ${(props) => props.width || "357px"};
-  height: 65px;
+  height: 60px;
   border-radius: ${(props) => props.borderRadius || "20px"};
   border: none;
   color: ${(props) => props.color || "white"};

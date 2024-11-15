@@ -1,28 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 import MenuBox from "../../components/profile/MenuBox";
 import SampleProfile from "../../images/sample-profile.svg";
 import profileCircle from "../../images/profile-circle.svg";
+import axios from "axios";
 
 const ProfilePage = () => {
+  const Server_IP = process.env.REACT_APP_Server_IP;
+
+  const { name } = useParams();
+
+  const [userInfo, setUserInfo] = useState({});
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const accessToken = localStorage.getItem("access");
+      try {
+        const response = await axios.get(
+          `${Server_IP}/api/users/profile/?name=${name}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        const profileImageURL =
+          response.data.profile_image &&
+          response.data.profile_image.startsWith("/")
+            ? `${Server_IP}${response.data.profile_image}`
+            : profileCircle;
+        setUserInfo({
+          name: response.data.name,
+          profile: profileImageURL,
+          email: response.data.email,
+          intro: response.data.intro,
+        });
+        console.log("Profile Image URL:", profileImageURL);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+      }
+    };
+    fetchUserProfile();
+  }, [name, Server_IP]);
+
   return (
     <div>
       <Wrapper>
         <ContentBox>
           <TopBar PageName={"Profile"} userImg={SampleProfile} />
           <InfoBox>
-            <UserImg src={profileCircle} />
-            <UserName>Mutsa</UserName>
-            <UserEmail>mutsa@mutsa.com</UserEmail>
+            <UserImg src={userInfo.profile || profileCircle} />
+            <UserName>{userInfo.name}</UserName>
+            <UserEmail>{userInfo.email}</UserEmail>
           </InfoBox>
           <IntroBox>
             <IntroTitle>I travel like a...</IntroTitle>
-            <IntroText>Growling lion ddddddddddddddddddddd🦁</IntroText>
+            <IntroText>{userInfo.intro}</IntroText>
           </IntroBox>
           <MenuBox />
-          <NavBar />
+          <NavBar pageName={"profile"} />
         </ContentBox>
       </Wrapper>
     </div>
@@ -38,7 +76,7 @@ const Wrapper = styled.div`
 
 const ContentBox = styled.div`
   margin: 86px 0px;
-  min-height: 780px;
+  min-height: 550px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;

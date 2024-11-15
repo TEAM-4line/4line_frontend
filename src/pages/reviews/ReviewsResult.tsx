@@ -42,7 +42,7 @@ const ReviewsResult: React.FC = () => {
           <NoPostsMessage>No posts found. Please apply a different filter.</NoPostsMessage>
         )}
       </ContentBox>
-      <NavBar />
+      <NavBar pageName="reviews/result"/>
     </Wrapper>
   );
 };

@@ -1,30 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
-import CategoryZone from "../../components/home/CategoryZone";
-import SampleProfile from "../../images/sample-profile.svg";
-import TypeLion from "../../images/type-lion.svg";
+import CategoryBar from "../../components/home/CategoryBar";
 import TopReview from "../../components/home/TopReview";
+import TypeImg from "../../components/home/TypeImg";
+import axios from "axios";
 
 const HomePage = () => {
-  const userInfo = {
-    profileImg: SampleProfile,
-    username: "김멋사",
-    usertype: "호기심 많은 탐험가 원숭이,",
-    typeImg: TypeLion,
-  };
+  const [userInfo, setUserInfo] = useState({});
+  const [communityPosts, setCommunityPosts] = useState([]);
+  const Server_IP = process.env.REACT_APP_Server_IP;
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const accresToken = localStorage.getItem("access");
+      try {
+        const response = await axios.get(`${Server_IP}/api/main/`, {
+          headers: {
+            Authorization: `Bearer ${accresToken}`,
+          },
+        });
+        console.log(response.data);
+        setUserInfo({
+          name: response.data.user_info.name,
+          usertype: response.data.user_info.trip_type,
+          typecontent: response.data.user_info.type_content,
+        });
+        setCommunityPosts(response.data.popular_communities);
+        console.log(communityPosts);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUserProfile();
+    // eslint-disable-next-line
+  }, [Server_IP]);
 
   return (
     <Wrapper>
-      <TopBar userImg={userInfo.profileImg} PageName={"Home"} />
       <ContentBox>
         <UserBox>
           <UserInfo>
             <div style={{ lineHeight: 1.4 }}>
-              <UserType>{userInfo.usertype}</UserType>
+              <UserType>{userInfo.typecontent}</UserType>
               <UserName>
-                <span>{userInfo.username}</span>님
+                <span>{userInfo.name}</span>님
               </UserName>
             </div>
             <SubText>
@@ -33,17 +53,17 @@ const HomePage = () => {
               여행하시겠습니까?
             </SubText>
           </UserInfo>
-          <TypeImg src={userInfo.typeImg} alt="유저 타입 이미지" />
+          <TypeImg type={userInfo.usertype} />
         </UserBox>
-        <CategoryZone />
+        <CategoryBar />
         <TopReviewBox>
           <TitleBox>
             <Title>Top Reviews</Title>
             <ViewAll>View All</ViewAll>
           </TitleBox>
-          <TopReview />
+          <TopReview reviews={communityPosts} />
         </TopReviewBox>
-        <NavBar />
+        <NavBar pageName="home" />
       </ContentBox>
     </Wrapper>
   );
@@ -58,7 +78,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentBox = styled.div`
-  margin: 80px 0px;
+  margin-bottom: 86px;
   background: linear-gradient(to bottom, #ff9c00, white);
   min-height: 780px;
   overflow-y: scroll;
@@ -83,7 +103,7 @@ const UserInfo = styled.div`
 `;
 
 const UserType = styled.div`
-  font-size: 20px;
+  font-size: 23px;
   width: 224px;
   color: white;
   font-weight: 600;
@@ -100,15 +120,10 @@ const UserName = styled.div`
 `;
 
 const SubText = styled.div`
-  font-size: 17px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: bolder;
   color: white;
   line-height: 1.4;
-`;
-
-const TypeImg = styled.img`
-  height: 164px;
-  border-radius: 100px;
 `;
 
 const TopReviewBox = styled.div`
