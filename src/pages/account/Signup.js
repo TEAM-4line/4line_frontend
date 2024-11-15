@@ -76,6 +76,7 @@ const Signup = () => {
         .then((response) => {
           console.log(response);
           alert("회원가입이 완료되었습니다!");
+          localStorage.clear();
           navigate("/login");
         })
         .catch((error) => {

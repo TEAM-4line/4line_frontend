@@ -6,8 +6,9 @@ import NavSpaces from "../../images/nav-spaces.svg";
 import NavReviews from "../../images/nav-reviews.svg";
 import NavProfile from "../../images/nav-profile.svg";
 
-const NavBar = ({ userId, pageName }) => {
+const NavBar = ({ pageName }) => {
   const navigate = useNavigate();
+  const name = localStorage.getItem("name");
 
   const navItems = [
     { icon: NavExplore, text: "Explore", path: "/home", keyword: "home" },
@@ -16,7 +17,7 @@ const NavBar = ({ userId, pageName }) => {
     {
       icon: NavProfile,
       text: "Profile",
-      path: `/profile/${userId}`,
+      path: `/profile/${name}`,
       keyword: "profile",
     },
   ];
@@ -26,11 +27,11 @@ const NavBar = ({ userId, pageName }) => {
       <NavList>
         {navItems.map((nav, index) => (
           <NavItem
-            keyword={index}
+            key={nav.keyword}
             onClick={() => navigate(nav.path)}
-            isSelected={pageName === nav.keyword}
+            $isSelected={pageName === nav.keyword}
           >
-            <IconWrapper isSelected={pageName === nav.keyword}>
+            <IconWrapper $isSelected={pageName === nav.keyword}>
               <NavIcon src={nav.icon} />
             </IconWrapper>
             {pageName === nav.keyword && <NavText>{nav.text}</NavText>}
@@ -77,8 +78,8 @@ const IconWrapper = styled.div`
   width: 64px;
   height: 30px;
   border-radius: 15px;
-  background-color: ${({ isSelected }) =>
-    isSelected ? "#f2dfbf" : "transparent"};
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? "#f2dfbf" : "transparent"};
   &:hover {
     background-color: #f2dfbf;
     border-radius: 18px;

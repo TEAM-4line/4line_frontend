@@ -4,8 +4,11 @@ import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 import WriteInput from "../../components/spaces/WriteInput";
 import OrangeBtn from "../../components/common/OrangeBtn";
+import axios from "axios";
 
 const SpacesWrite = () => {
+  const Server_IP = process.env.REACT_APP_Server_IP;
+  const accessToken = localStorage.getItem("access");
   const [postValue, setPostValue] = useState({
     age: "",
     travel_area: "",
@@ -38,7 +41,6 @@ const SpacesWrite = () => {
     if (!isFilled) {
       alert("모든 항목을 입력해 주세요");
     } else {
-      console.log(postValue);
       alert("게시글이 작성되었습니다.");
       setPostValue({
         age: "",
@@ -46,6 +48,20 @@ const SpacesWrite = () => {
         travel_period: "",
         description: "",
       });
+      axios
+        .post(`${Server_IP}/api/accompany`, postValue, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          alert("테스트가 완료되었습니다!");
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("결과 전송에 실패했습니다.");
+        });
     }
   };
 

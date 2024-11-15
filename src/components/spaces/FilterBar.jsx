@@ -1,62 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-const FilterBar = () => {
-  const [selectedFilter, setSelectedFilter] = useState("lion");
-
-  const handleFilter = (btnId) => {
-    if (selectedFilter !== btnId) {
-      setSelectedFilter(btnId);
-    }
-  };
-
+const FilterBar = ({ selectedFilter, onFilterSelect }) => {
   return (
-    <div>
-      <FilterBarWrapper>
-        <FilterBox>
-          <Top>
-            <FilterBtn
-              onClick={() => handleFilter("lion")}
-              isSelected={selectedFilter === "lion"}
-            >
-              🦁
-            </FilterBtn>
-            <FilterBtn
-              onClick={() => handleFilter("dolphin")}
-              isSelected={selectedFilter === "dolphin"}
-            >
-              🐬
-            </FilterBtn>
-            <FilterBtn
-              onClick={() => handleFilter("monkey")}
-              isSelected={selectedFilter === "monkey"}
-            >
-              🐵
-            </FilterBtn>
-          </Top>
-          <Bottom>
-            <FilterBtn
-              onClick={() => handleFilter("cat")}
-              isSelected={selectedFilter === "cat"}
-            >
-              😺
-            </FilterBtn>
-            <FilterBtn
-              onClick={() => handleFilter("owl")}
-              isSelected={selectedFilter === "owl"}
-            >
-              🦉
-            </FilterBtn>
-            <FilterBtn
-              onClick={() => handleFilter("fox")}
-              isSelected={selectedFilter === "fox"}
-            >
-              🦊
-            </FilterBtn>
-          </Bottom>
-        </FilterBox>
-      </FilterBarWrapper>
-    </div>
+    <FilterBarWrapper>
+      <FilterBox>
+        <Top>
+          <FilterBtn
+            onClick={() => onFilterSelect("lion")}
+            $isSelected={selectedFilter === "lion"}
+          >
+            🦁
+          </FilterBtn>
+          <FilterBtn
+            onClick={() => onFilterSelect("dolphin")}
+            $isSelected={selectedFilter === "dolphin"}
+          >
+            🐬
+          </FilterBtn>
+          <FilterBtn
+            onClick={() => onFilterSelect("monkey")}
+            $isSelected={selectedFilter === "monkey"}
+          >
+            🐵
+          </FilterBtn>
+        </Top>
+        <Bottom>
+          <FilterBtn
+            onClick={() => onFilterSelect("cat")}
+            $isSelected={selectedFilter === "cat"}
+          >
+            😺
+          </FilterBtn>
+          <FilterBtn
+            onClick={() => onFilterSelect("owl")}
+            $isSelected={selectedFilter === "owl"}
+          >
+            🦉
+          </FilterBtn>
+          <FilterBtn
+            onClick={() => onFilterSelect("fox")}
+            $isSelected={selectedFilter === "fox"}
+          >
+            🦊
+          </FilterBtn>
+        </Bottom>
+      </FilterBox>
+    </FilterBarWrapper>
   );
 };
 
@@ -76,28 +66,26 @@ const FilterBox = styled.div`
 
 const Top = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 155, 41, 0.28);
 `;
 
 const Bottom = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `;
 
 const FilterBtn = styled.button`
   font-size: 40px;
-  background-color: ${({ isSelected }) =>
-    isSelected ? "var(--orange)" : "transparent"};
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? "var(--orange)" : "transparent"};
   padding: 7px 48px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: ${({ isSelected }) =>
-      isSelected ? "var(--orange)" : "rgba(255, 155, 41, 0.2)"};
+    background-color: ${({ $isSelected }) =>
+      $isSelected ? "var(--orange)" : "rgba(255, 155, 41, 0.2)"};
   }
 `;

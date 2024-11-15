@@ -1,20 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 import MenuBox from "../../components/profile/MenuBox";
 import SampleProfile from "../../images/sample-profile.svg";
 import profileCircle from "../../images/profile-circle.svg";
+import axios from "axios";
 
 const ProfilePage = () => {
-  const userInfo = {
-    name: "김멋사",
-    profile: profileCircle,
-    email: "mutsa@mutsa.com",
-    intro: "안녕하세요. 저는 멋사입니다.",
-  };
+  const Server_IP = process.env.REACT_APP_Server_IP;
 
-  //   /api/users/profile/?name=<str:name>
+  const { name } = useParams();
+
+  const [userInfo, setUserInfo] = useState({});
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const accessToken = localStorage.getItem("access");
+      try {
+        const response = await axios.get(
+          `${Server_IP}/api/users/profile/?name=${name}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        const profileImageURL =
+          response.data.profile_image &&
+          response.data.profile_image.startsWith("/")
+            ? `${Server_IP}${response.data.profile_image}`
+            : profileCircle;
+        setUserInfo({
+          name: response.data.name,
+          profile: profileImageURL,
+          email: response.data.email,
+          intro: response.data.intro,
+        });
+        console.log("Profile Image URL:", profileImageURL);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+      }
+    };
+    fetchUserProfile();
+  }, [name, Server_IP]);
 
   return (
     <div>
@@ -22,7 +51,7 @@ const ProfilePage = () => {
         <ContentBox>
           <TopBar PageName={"Profile"} userImg={SampleProfile} />
           <InfoBox>
-            <UserImg src={userInfo.profile} />
+            <UserImg src={userInfo.profile || profileCircle} />
             <UserName>{userInfo.name}</UserName>
             <UserEmail>{userInfo.email}</UserEmail>
           </InfoBox>

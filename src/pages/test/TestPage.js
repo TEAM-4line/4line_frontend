@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import questionsData from "../../dummy/TestData.json";
 import ProgressBar from "../../components/test/ProgressBar";
+import OrangeBtn from "../../components/common/OrangeBtn";
 import axios from "axios";
 
 const TestPage = () => {
   const Server_IP = process.env.REACT_APP_Server_IP;
+  const name = localStorage.getItem("name");
+  const id = localStorage.getItem("id");
+  const accessToken = localStorage.getItem("access");
+  const navigate = useNavigate();
+
   const [answers, setAnswers] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -26,8 +33,9 @@ const TestPage = () => {
     if (currentQuestionIndex < questionsData.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      alert("테스트가 완료되었습니다!");
       const requestBody = {
+        id: id,
+        name: name,
         travel_style: answers[1],
         transportation: answers[2],
         cafe_wait_time: answers[3],
@@ -40,15 +48,20 @@ const TestPage = () => {
         trip_planning_style: answers[10],
       };
       console.log(requestBody);
-
       axios
-        .post(`${Server_IP}/api/question/test/`, requestBody)
+        .post(`${Server_IP}/api/question/test`, requestBody, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
         .then((response) => {
-          console.log("성공적으로 전송:", response.data);
+          console.log(response.data);
           alert("테스트가 완료되었습니다!");
+          localStorage.setItem("trip_type", response.data.trip_type);
+          navigate("/test/result");
         })
         .catch((error) => {
-          console.error("전송 중 오류 발생:", error);
+          console.error(error);
           alert("결과 전송에 실패했습니다.");
         });
     }
@@ -62,13 +75,13 @@ const TestPage = () => {
         <ProgressBarWrapper>
           <ProgressBar current={currentQuestionIndex + 1} total={10} />
         </ProgressBarWrapper>
-        <div key={currentQuestion.id}>
+        <TestWrapper key={currentQuestion.id}>
           <TestTitle>{currentQuestion.question}</TestTitle>
           <TestOptions>
             {currentQuestion.options.map((option) => (
               <OptionLabel
                 key={option.id}
-                isSelected={answers[currentQuestion.id] === option.id}
+                $isSelected={answers[currentQuestion.id] === option.id}
               >
                 <OptionInput
                   type="radio"
@@ -83,12 +96,17 @@ const TestPage = () => {
               </OptionLabel>
             ))}
           </TestOptions>
-          <NextButton onClick={handleNextClick}>
-            {currentQuestionIndex < questionsData.questions.length - 1
-              ? "다음 문제"
-              : "결과 보기"}
-          </NextButton>
-        </div>
+          <BtnBox>
+            <OrangeBtn
+              onBtnClick={handleNextClick}
+              txt={
+                currentQuestionIndex < questionsData.questions.length - 1
+                  ? "다음 문제"
+                  : "결과 보기"
+              }
+            />
+          </BtnBox>
+        </TestWrapper>
       </Wrapper>
     </div>
   );
@@ -105,6 +123,13 @@ const Wrapper = styled.div`
 
 const ProgressBarWrapper = styled.div`
   padding: 70px 27px 16px 27px;
+`;
+
+const TestWrapper = styled.div`
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const TestTitle = styled.div`
@@ -137,8 +162,8 @@ const OptionLabel = styled.label`
   text-align: center;
   white-space: pre-line;
   cursor: pointer;
-  font-weight: ${({ isSelected }) => (isSelected ? "bold" : "normal")};
-  border-width: ${({ isSelected }) => (isSelected ? "3px" : "1px")};
+  font-weight: ${({ $isSelected }) => ($isSelected ? "bold" : "normal")};
+  border-width: ${({ $isSelected }) => ($isSelected ? "3px" : "1px")};
   transition: 0.3s ease;
 
   &:hover {
@@ -152,15 +177,19 @@ const OptionInput = styled.input`
   display: none; /* 라디오 버튼 숨기는 스타일 설정 */
 `;
 
-const NextButton = styled.button`
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  background-color: var(--orange);
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  width: 357px;
-  height: 65px;
-  margin: 113px 27px 90px 27px;
+const BtnBox = styled.div`
+  margin: 113px 27px 60px 27px;
 `;
+
+// const NextButton = styled.button`
+//   font-size: 20px;
+//   font-weight: bold;
+//   color: white;
+//   background-color: var(--orange);
+//   border-radius: 20px;
+//   border: none;
+//   cursor: pointer;
+//   width: 357px;
+//   height: 65px;
+//   margin: 113px 27px 90px 27px;
+// `;
