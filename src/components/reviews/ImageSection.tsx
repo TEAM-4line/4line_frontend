@@ -1,4 +1,6 @@
 import React from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
 
 interface ImageSectionProps {
   imageSrc: string;
@@ -6,10 +8,28 @@ interface ImageSectionProps {
 
 const ImageSection: React.FC<ImageSectionProps> = ({ imageSrc }) => {
   return (
-    <figure className="mt-5">
-      <img loading="lazy" src={imageSrc} className="object-contain w-full rounded-lg aspect-[1.82]" alt="Travel destination" />
-    </figure>
+    <ImageWrapper>
+      <StyledImage
+        loading="lazy"
+        src={imageSrc}
+        alt="Travel destination"
+      />
+    </ImageWrapper>
   );
 };
 
+
 export default ImageSection;
+
+const ImageWrapper = styled.figure`
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+`;
+
+const StyledImage = styled.img`
+  width: 95%; // 본문보다 살짝 좁게 설정
+  max-width: 400px; // ReviewCard의 max-width보다 살짝 작게
+  border-radius: 12px; // 이미지 모서리를 부드럽게 처리
+  object-fit: cover;
+`;

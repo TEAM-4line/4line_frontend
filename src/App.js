@@ -9,6 +9,7 @@ import HomePage from "./pages/home/HomePage";
 import SpacesPage from "./pages/spaces/SpacesPage";
 import ReviewsPage from "./pages/reviews/ReviewsPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import ReviewsResult from "./pages/reviews/ReviewsResult";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/spaces" element={<SpacesPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/reviews/result" element={<ReviewsResult />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
     </div>
