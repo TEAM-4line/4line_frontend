@@ -20,7 +20,9 @@ const SpacesPost = ({ posts }) => {
           <Header>
             <UserSection>
               <ProfileImage
-                src={`${Server_IP}/${post.profile_image}` || SampleProfile}
+                src={
+                  `${Server_IP}/media/${post.profile_image}` || SampleProfile
+                }
                 alt="Profile"
               />
               <Username>{post.user_name}</Username>
