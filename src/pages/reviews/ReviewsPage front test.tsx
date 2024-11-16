@@ -10,7 +10,7 @@ const ReviewsPage: React.FC = () => {
   const samplePosts = [
     {
       id: 1,
-      avatarSrc: "/images/sample-profile.svg",
+      profile_image: "/images/sample-profile.svg",
       name: "Mutsa",
       trip_time: "1 week",
       cost: "150,000",
@@ -18,40 +18,41 @@ const ReviewsPage: React.FC = () => {
       rating: "★★★★☆",
       content:
         "Amumal Amumal beautiful trip~~~~~~ I wanna live there enjoying this beautiful scenery",
-      imageSrc: "/images/review-sample.png",
+      photo: "/images/review-sample.png",
       like_count: 1116,
       bookmarks: 300,
     },
     {
       id: 2,
-      avatarSrc: "/images/sample-profile.svg",
+      profile_image: "/images/sample-profile.svg",
       name: "Alex",
       trip_time: "3 days",
       cost: "200,000",
       region: "Europe",
       rating: "★★★☆☆",
       content: "Paris was wonderful, but it was a little expensive!",
-      imageSrc: "/images/review-sample.png",
+      photo: "/images/review-sample.png",
       like_count: 345,
       bookmarks: 150,
     },
     {
       id: 3,
-      avatarSrc: "/images/sample-profile.svg",
+      profile_image: "/images/sample-profile.svg",
       name: "John",
       trip_time: "2 weeks",
       cost: "500,000",
       region: "Asia",
       rating: "★★★★★",
       content: "Tokyo is amazing! I loved the food and culture.",
-      imageSrc: "/images/review-sample.png",
+      photo: "/images/review-sample.png",
       like_count: 567,
       bookmarks: 245,
     },
   ];
 
   // 게시글 상태 정의
-  const [posts, setPosts] = useState(samplePosts);
+  // const [posts, setPosts] = useState(samplePosts);
+  const Server_IP = process.env.REACT_APP_Server_IP;
   const [filteredPosts, setFilteredPosts] = useState(samplePosts);
 
   // 필터 적용 핸들러
@@ -100,14 +101,15 @@ const ReviewsPage: React.FC = () => {
             filteredPosts.map((post) => (
               <ReviewCard
                 key={post.id}
-                avatarSrc={post.avatarSrc}
+                // avatarSrc={post.avatarSrc}
+                photo={post.photo}
                 name={post.name}
                 trip_time={post.trip_time}
                 cost={post.cost}
                 region={post.region}
                 rating={post.rating}
                 content={post.content}
-                imageSrc={post.imageSrc}
+                profile_image={`${Server_IP}/media/${post.profile_image}`}
                 like_count={post.like_count}
                 bookmarks={post.bookmarks}
               />

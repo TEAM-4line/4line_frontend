@@ -6,14 +6,30 @@ import NavBar from "../../components/home/NavBar";
 import ReviewCard from "../../components/reviews/ReviewCard";
 import WriteBtn from "../../images/write-btn.png";
 
+interface Post {
+  id: number;
+  photo: string;
+  name: string;
+  profile_image: string;
+  region: string;
+  trip_time: string;
+  cost: string;
+  rating: string;
+  content: string;
+  imageSrc: string;
+  like_count: number;
+  bookmarks: number;
+}
+
 const ReviewsResult: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { filteredPosts, loading, error } = location.state || {
-    filteredPosts: [],
-    loading: false,
-    error: null,
-  };
+  const Server_IP = process.env.REACT_APP_Server_IP;
+  const {
+    filteredPosts = [],
+    loading = false,
+    error = null,
+  } = location.state || {};
 
   return (
     <Wrapper>
@@ -26,17 +42,19 @@ const ReviewsResult: React.FC = () => {
         ) : error ? (
           <ErrorMessage>{error}</ErrorMessage>
         ) : filteredPosts.length > 0 ? (
-          filteredPosts.map((post: any) => (
+          filteredPosts.map((post: Post) => (
             <ReviewCard
               key={post.id}
-              avatarSrc={post.avatarSrc}
+              // avatarSrc={post.avatarSrc}
+              photo={post.photo}
               name={post.name}
+              profile_image={`${Server_IP}/media/${post.profile_image}`}
               region={post.region}
               trip_time={post.trip_time}
               cost={post.cost}
               rating={post.rating}
               content={post.content}
-              imageSrc={post.imageSrc}
+              // imageSrc={post.imageSrc}
               like_count={post.like_count}
               bookmarks={post.bookmarks}
             />
@@ -72,7 +90,7 @@ const Wrapper = styled.main`
   margin: 0 auto;
   width: 100%;
   background-color: white;
-  overflow: hidden; // 스크롤바 안 보이게 처리
+  overflow: hidden;
 `;
 
 const TopBarContainer = styled.div`
@@ -92,7 +110,7 @@ const ContentBox = styled.div`
   overflow-y: auto;
   max-width: 412px;
   width: 100%;
-  padding-top: 80px; // TopBar의 높이를 고려한 패딩 추가
+  padding-top: 80px;
   box-sizing: border-box;
   &::-webkit-scrollbar {
     display: none;
@@ -126,7 +144,6 @@ const NoPostsMessage = styled.p`
   font-size: 1.2rem;
   color: gray;
 `;
-
 const BtnBox = styled.div`
   position: fixed;
   bottom: 96px;

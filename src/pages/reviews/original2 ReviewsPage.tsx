@@ -1,163 +1,87 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import ReviewFilter from "../../components/reviews/ReviewFilter";
-import ReviewCard from "../../components/reviews/ReviewCard";
 import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
+import ReviewCard from "../../components/reviews/ReviewCard";
 
-const ReviewsPage: React.FC = () => {
-  // 상태 정의: 필터링된 게시글들
-  const [filteredPosts, setFilteredPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+const Server_IP = process.env.REACT_APP_Server_IP || "http://localhost:8000";
 
-  // 필터링 조건을 사용하여 백엔드 API 호출
-  const handleSearch = async (filterData: {
-    trip_time: string;
-    cost: string;
-    region: string;
-  }) => {
-    setLoading(true);
-    setError(null);
-    try {
-      // 백엔드 API 요청
-      const response = await axios.get(
-        "https://api.your-backend.com/community/posts",
-        {
-          params: {
-            trip_time: filterData.trip_time,
-            cost: filterData.cost,
-            region: filterData.region,
-          },
-        }
-      );
-      // 필터링된 결과를 상태로 설정
-      setFilteredPosts(response.data);
-    } catch (err) {
-      console.error("게시글 필터링 실패:", err);
-      setError("Failed to load posts. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
-  };
+const ReviewPage: React.FC = () => {
+  const samplePosts = [
+    {
+      id: 1,
+      profile_image: "/images/sample-profile.svg",
+      name: "Mutsa",
+      trip_time: "1 week",
+      cost: "150,000",
+      region: "North America",
+      rating: "★★★★☆",
+      content:
+        "Amumal Amumal beautiful trip~~~~~~ I wanna live there enjoying this beautiful scenery",
+      photo: "/images/sample-profile.svg",
+      like_count: 1116,
+      bookmarks: 300,
+    },
+    {
+      id: 2,
+      profile_image: "/images/sample-profile.svg",
+      name: "Mutsa",
+      trip_time: "1 week",
+      cost: "150,000",
+      region: "North America",
+      rating: "",
+      content:
+        "Amumal Amumal beautiful trip~~~~~~ I wanna live there enjoying this beautiful scenery",
+      photo: "/images/review-sample.png",
+      like_count: 0,
+      bookmarks: 0,
+    },
+  ];
 
   return (
-    <PageWrapper>
-      <TopBarContainer>
-        <TopBar PageName={"Reviews"} userImg={"/images/sample-profile.svg"} />
-      </TopBarContainer>
-      <ContentWrapper>
-        {/* 필터링 컴포넌트 */}
-        <FilterSection>
-          <ReviewFilter onSearch={handleSearch} />
-        </FilterSection>
-
-        {/* 게시글 목록 표시 */}
-        <PostsSection>
-          {loading ? (
-            <LoadingMessage>Loading...</LoadingMessage>
-          ) : error ? (
-            <ErrorMessage>{error}</ErrorMessage>
-          ) : filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
-              <ReviewCard
-                key={post.id}
-                avatarSrc={post.avatarSrc}
-                name={post.name}
-                // location={post.location}
-                trip_time={post.trip_time}
-                cost={post.cost}
-                region={post.region}
-                rating={post.rating}
-                content={post.content}
-                imageSrc={post.imageSrc}
-                like_count={post.like_count}
-                bookmarks={post.bookmarks}
-              />
-            ))
-          ) : (
-            <NoPostsMessage>
-              No posts found. Please apply a different filter.
-            </NoPostsMessage>
-          )}
-        </PostsSection>
-      </ContentWrapper>
-      <NavBarContainer>
+    <Wrapper>
+      <ContentBox>
+        <TopBar PageName="Reviews" userImg="/images/sample-profile.svg" />
+        {samplePosts.map((post) => (
+          <ReviewCard
+            key={post.id}
+            // avatarSrc={post.avatarSrc}
+            name={post.name}
+            trip_time={post.trip_time}
+            cost={post.cost}
+            region={post.region}
+            rating={post.rating || "No Rating"}
+            content={post.content}
+            profile_image={`${Server_IP}${post.profile_image}`}
+            photo={post.photo}
+            like_count={post.like_count}
+            bookmarks={post.bookmarks}
+          />
+        ))}
         <NavBar pageName="reviews" />
-      </NavBarContainer>
-    </PageWrapper>
+      </ContentBox>
+    </Wrapper>
   );
 };
 
-export default ReviewsPage;
+export default ReviewPage;
 
 // Styled Components
-const PageWrapper = styled.div`
+const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-`;
-
-const TopBarContainer = styled.div`
-  width: 100%;
   max-width: 412px;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  background-color: white;
-`;
-
-const ContentWrapper = styled.div`
-  flex: 1;
-  max-width: 412px;
-  width: 100%;
   margin: 0 auto;
-  padding-top: 90px; // TopBar의 높이를 고려한 패딩
-  padding-bottom: 70px; // NavBar의 높이를 고려한 패딩
-  overflow-y: auto;
-  box-sizing: border-box;
-`;
-
-const NavBarContainer = styled.div`
   width: 100%;
-  max-width: 412px;
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
   background-color: white;
 `;
 
-const FilterSection = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const PostsSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-`;
-
-const LoadingMessage = styled.p`
-  text-align: center;
-  font-size: 1.2rem;
-`;
-
-const ErrorMessage = styled.p`
-  text-align: center;
-  font-size: 1.2rem;
-  color: red;
-`;
-
-const NoPostsMessage = styled.p`
-  text-align: center;
-  font-size: 1.2rem;
-  color: gray;
+const ContentBox = styled.div`
+  margin: 86px 0px;
+  min-height: 780px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

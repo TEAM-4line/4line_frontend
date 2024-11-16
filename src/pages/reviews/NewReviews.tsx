@@ -1,25 +1,37 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 import axios from "axios";
 
 const NewReviewPage: React.FC = () => {
+  const navigate = useNavigate();
   const Server_IP = process.env.REACT_APP_Server_IP; // 서버 IP 가져오기
   const accessToken = localStorage.getItem("access"); // 인증 토큰 가져오기
   const userId = localStorage.getItem("id"); // 사용자 ID 가져오기
+  // const [photo, setPhoto] = useState("");
 
   // 폼 상태 정의
-  const [formValue, setFormValue] = useState({
+  const [formValue, setFormValue] = useState<{
+    title: string;
+    content: string;
+    region: string;
+    trip_time: string;
+    cost: string;
+    activity: string;
+    rating: number | null;
+    photo: string | File;
+  }>({
     title: "",
     content: "",
     region: "",
     trip_time: "",
     cost: "",
     activity: "",
-    rating: null as number | null,
+    rating: null,
+    photo: "", // 초기값은 빈 문자열
   });
-
   // 폼 값 변경 시 호출되는 핸들러
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,13 +51,20 @@ const NewReviewPage: React.FC = () => {
     }));
   };
 
-  // 이미지 첨부 버튼 클릭 시 알림
-  const handleImageUploadClick = () => {
-    alert("아직 제공하지 않는 기능입니다.");
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (!files || files.length === 0) {
+      alert("사진을 선택해 주세요.");
+      return;
+    }
+    const uploadFile = files[0];
+    setFormValue((prev) => ({
+      ...prev,
+      photo: uploadFile, // 파일 객체를 그대로 저장
+    }));
   };
 
-  // 게시글 작성 버튼 클릭 시 호출되는 핸들러
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // 필수 항목 유효성 검사
     if (
       formValue.title.trim() === "" ||
@@ -55,62 +74,56 @@ const NewReviewPage: React.FC = () => {
       formValue.cost.trim() === "" ||
       formValue.activity.trim() === "" ||
       formValue.rating === null ||
+      !formValue.photo ||
       !userId
     ) {
       alert("모든 항목을 입력해 주세요");
       return;
     }
 
-    // 필드 값 형식 맞추기
-    const postData = {
-      title: formValue.title.trim(),
-      content: formValue.content.trim(),
-      region: formValue.region.trim(),
-      trip_time: formValue.trip_time.trim(),
-      cost: parseInt(formValue.cost, 10), // 비용을 숫자 형식으로 변환
-      activity: formValue.activity.trim(),
-      rating: formValue.rating,
-      writer: parseInt(userId, 10), // 사용자 ID를 숫자로 변환
-    };
+    try {
+      const formData = new FormData();
+      formData.append("title", formValue.title.trim());
+      formData.append("content", formValue.content.trim());
+      formData.append("region", formValue.region.trim());
+      formData.append("trip_time", formValue.trip_time.trim());
+      formData.append("cost", String(parseInt(formValue.cost, 10)));
+      formData.append("activity", formValue.activity.trim());
+      formData.append("rating", String(formValue.rating));
+      formData.append("writer", String(userId));
+      formData.append("photo", formValue.photo);
 
-    console.log("게시글 작성 데이터:", postData);
-
-    // 게시글 작성 요청 보내기
-    axios
-      .post(`${Server_IP}/api/community/post`, postData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // 인증 헤더 추가
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        alert("게시글이 성공적으로 작성되었습니다!");
-        // 폼 초기화
-        setFormValue({
-          title: "",
-          content: "",
-          region: "",
-          trip_time: "",
-          cost: "",
-          activity: "",
-          rating: null,
-        });
-      })
-      .catch((error) => {
-        console.error("게시글 작성 실패:", error);
-        if (error.response) {
-          console.error("에러 응답:", error.response.data);
-          alert(
-            `게시글 작성 실패: ${
-              error.response.data.detail || "다시 시도해 주세요."
-            }`
-          );
-        } else {
-          alert("게시글 작성에 실패했습니다. 다시 시도해 주세요.");
+      const response = await axios.post(
+        `${Server_IP}/api/community/post`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
-  };
+      );
 
+      console.log("게시글 작성 성공:", response.data);
+      alert("게시글이 성공적으로 작성되었습니다!");
+
+      // 폼 초기화
+      setFormValue({
+        title: "",
+        content: "",
+        region: "",
+        trip_time: "",
+        cost: "",
+        activity: "",
+        rating: null,
+        photo: "",
+      });
+      navigate(-1);
+    } catch (error) {
+      console.log("게시글 작성 실패:", error);
+      console.log(formValue);
+    }
+  };
   return (
     <PageWrapper>
       <TopBarContainer>
@@ -191,9 +204,11 @@ const NewReviewPage: React.FC = () => {
                 placeholder="본문을 입력해 주세요"
               />
             </FormField>
-            <FileUploadButton onClick={handleImageUploadClick}>
-              사진/영상 첨부
-            </FileUploadButton>
+            <FileUploadButton
+              type="file"
+              onChange={handlePhotoChange}
+              // accept="image/png, image/jpeg, image/jpg"
+            />
             <SubmitButton onClick={handleSubmit}>업로드</SubmitButton>
           </Form>
         </ContentBox>
@@ -310,7 +325,7 @@ const TextArea = styled.textarea`
   }
 `;
 
-const FileUploadButton = styled.button`
+const FileUploadButton = styled.input`
   padding: 12px;
   margin-top: 10px;
   background-color: #e0e0e0;
