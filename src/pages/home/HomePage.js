@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import NavBar from "../../components/home/NavBar";
 import CategoryBar from "../../components/home/CategoryBar";
@@ -7,6 +8,7 @@ import TypeImg from "../../components/home/TypeImg";
 import axios from "axios";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const [communityPosts, setCommunityPosts] = useState([]);
   const Server_IP = process.env.REACT_APP_Server_IP;
@@ -59,7 +61,7 @@ const HomePage = () => {
         <TopReviewBox>
           <TitleBox>
             <Title>Top Reviews</Title>
-            <ViewAll>View All</ViewAll>
+            <ViewAll onClick={() => navigate("/reviews")}>View All</ViewAll>
           </TitleBox>
           <TopReview reviews={communityPosts} />
         </TopReviewBox>

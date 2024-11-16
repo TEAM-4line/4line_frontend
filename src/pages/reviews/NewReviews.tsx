@@ -11,6 +11,9 @@ const NewReviewPage: React.FC = () => {
   const accessToken = localStorage.getItem("access"); // 인증 토큰 가져오기
   const userId = localStorage.getItem("id"); // 사용자 ID 가져오기
   // const [photo, setPhoto] = useState("");
+  const trip_timeOptions = ["일", "주", "개월"];
+  const [trip_time, setTrip_time] = useState("");
+  const [trip_timeUnit, setTrip_timeUnit] = useState("week");
 
   // 폼 상태 정의
   const [formValue, setFormValue] = useState<{
@@ -18,6 +21,7 @@ const NewReviewPage: React.FC = () => {
     content: string;
     region: string;
     trip_time: string;
+    trip_timeUnit: string;
     cost: string;
     activity: string;
     rating: number | null;
@@ -27,6 +31,7 @@ const NewReviewPage: React.FC = () => {
     content: "",
     region: "",
     trip_time: "",
+    trip_timeUnit: "",
     cost: "",
     activity: "",
     rating: null,
@@ -51,6 +56,13 @@ const NewReviewPage: React.FC = () => {
     }));
   };
 
+  const handleTripTimeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormValue((prev) => ({
+      ...prev,
+      trip_timeUnit: e.target.value,
+    }));
+  };
+
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (!files || files.length === 0) {
@@ -71,6 +83,7 @@ const NewReviewPage: React.FC = () => {
       formValue.content.trim() === "" ||
       formValue.region.trim() === "" ||
       formValue.trip_time.trim() === "" ||
+      formValue.trip_timeUnit.trim() === "" ||
       formValue.cost.trim() === "" ||
       formValue.activity.trim() === "" ||
       formValue.rating === null ||
@@ -87,6 +100,7 @@ const NewReviewPage: React.FC = () => {
       formData.append("content", formValue.content.trim());
       formData.append("region", formValue.region.trim());
       formData.append("trip_time", formValue.trip_time.trim());
+      formData.append("trip_timeUnit", formValue.trip_timeUnit.trim());
       formData.append("cost", String(parseInt(formValue.cost, 10)));
       formData.append("activity", formValue.activity.trim());
       formData.append("rating", String(formValue.rating));
@@ -113,6 +127,7 @@ const NewReviewPage: React.FC = () => {
         content: "",
         region: "",
         trip_time: "",
+        trip_timeUnit: "",
         cost: "",
         activity: "",
         rating: null,
@@ -147,12 +162,24 @@ const NewReviewPage: React.FC = () => {
             </FormField>
             <FormField>
               <Label># 여행기간</Label>
-              <Input
-                name="trip_time"
-                value={formValue.trip_time}
-                onChange={handleChange}
-                placeholder="여행기간을 입력하세요"
-              />
+              <InputGroup>
+                <Input
+                  name="trip_time"
+                  value={formValue.trip_time}
+                  onChange={handleChange}
+                  placeholder="예) 1"
+                />
+                <Select
+                  value={formValue.trip_timeUnit}
+                  onChange={handleTripTimeChange}
+                >
+                  {trip_timeOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+              </InputGroup>
             </FormField>
             <FormField>
               <Label># 비용</Label>
@@ -350,4 +377,16 @@ const SubmitButton = styled.button`
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const Select = styled.select`
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `;
