@@ -1,28 +1,41 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 interface ReviewFilterProps {
-  onSearch: (filters: { duration: string; durationUnit: string; cost: string; costUnit: string; region: string }) => void;
+  onSearch: (filters: {
+    trip_time: string;
+    trip_timeUnit: string;
+    cost: string;
+    costUnit: string;
+    region: string;
+  }) => void;
 }
 
 const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
   // 상태 정의
-  const [duration, setDuration] = useState('');
-  const [durationUnit, setDurationUnit] = useState('week');
-  const [cost, setCost] = useState('');
-  const [costUnit, setCostUnit] = useState('KRW per day');
-  const [region, setRegion] = useState('');
+  const [trip_time, setTrip_time] = useState("");
+  const [trip_timeUnit, setTrip_timeUnit] = useState("week");
+  const [cost, setCost] = useState("");
+  const [costUnit, setCostUnit] = useState("KRW per day");
+  const [region, setRegion] = useState("");
 
   const [showFilter, setShowFilter] = useState(false); // 필터 표시 여부 상태
 
-  const durationOptions = ['일', '주일', '개월'];
-  const costOptions = ['원(₩)', '달러($)'];
-  const regionOptions = ['아시아', '남아메리카', '북아메리카', '유럽', '아프리카', '호주'];
+  const trip_timeOptions = ["일", "주일", "개월"];
+  const costOptions = ["원(₩)", "달러($)"];
+  const regionOptions = [
+    "아시아",
+    "남아메리카",
+    "북아메리카",
+    "유럽",
+    "아프리카",
+    "호주",
+  ];
 
   // 검색 핸들러
   const handleSearch = () => {
     // 상위 컴포넌트에 필터 데이터 전달
-    onSearch({ duration, durationUnit, cost, costUnit, region });
+    onSearch({ trip_time, trip_timeUnit, cost, costUnit, region });
   };
 
   return (
@@ -48,12 +61,15 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
             <InputGroup>
               <FilterInput
                 type="text"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
+                value={trip_time}
+                onChange={(e) => setTrip_time(e.target.value)}
                 placeholder="예) 1"
               />
-              <FilterSelect value={durationUnit} onChange={(e) => setDurationUnit(e.target.value)}>
-                {durationOptions.map((option) => (
+              <FilterSelect
+                value={trip_timeUnit}
+                onChange={(e) => setTrip_timeUnit(e.target.value)}
+              >
+                {trip_timeOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
                   </option>
@@ -70,7 +86,10 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
                 onChange={(e) => setCost(e.target.value)}
                 placeholder="예) 50,000"
               />
-              <FilterSelect value={costUnit} onChange={(e) => setCostUnit(e.target.value)}>
+              <FilterSelect
+                value={costUnit}
+                onChange={(e) => setCostUnit(e.target.value)}
+              >
                 {costOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
@@ -81,7 +100,10 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
           </FilterItem>
           <FilterItem>
             <label>지역</label>
-            <FilterSelect value={region} onChange={(e) => setRegion(e.target.value)}>
+            <FilterSelect
+              value={region}
+              onChange={(e) => setRegion(e.target.value)}
+            >
               <option value="">지역을 선택하세요</option>
               {regionOptions.map((option) => (
                 <option key={option} value={option}>
@@ -132,7 +154,7 @@ const FilterButton = styled.button`
   background-color: #fff;
   border: none;
   padding: 0.5rem;
-  padding-right: .7rem;
+  padding-right: 0.7rem;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
   outline: none;

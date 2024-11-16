@@ -1,47 +1,47 @@
-import React from 'react';
-import UserInfo from './UserInfo';
-import TravelDetails from './TravelDetails';
-import ImageSection from './ImageSection';
-import InteractionBar from './InteractionBar';
-import styled from 'styled-components';
+import React from "react";
+import UserInfo from "./UserInfo";
+import TravelDetails from "./TravelDetails";
+import ImageSection from "./ImageSection";
+import InteractionBar from "./InteractionBar";
+import styled from "styled-components";
 
 interface ReviewCardProps {
   avatarSrc: string;
   name: string;
-  duration: string;
+  trip_time: string;
   cost: string;
   region: string;
   rating: string;
-  description: string;
+  content: string;
   imageSrc: string;
-  likes: number;
+  like_count: number;
   bookmarks: number;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
   avatarSrc,
   name,
-  duration,
+  trip_time,
   cost,
   region,
   rating,
-  description,
+  content,
   imageSrc,
-  likes,
+  like_count,
   bookmarks,
 }) => {
   return (
     <CardContainer>
       <UserInfo username={name} region={region} />
       <TravelDetails
-        duration={duration}
+        trip_time={trip_time}
         cost={cost}
         region={region}
         rating={rating}
-        description={description}
+        content={content}
       />
       <ImageSection imageSrc={imageSrc} />
-      <InteractionBar likes={likes} bookmarks={bookmarks} />
+      <InteractionBar like_count={like_count} bookmarks={bookmarks} />
     </CardContainer>
   );
 };

@@ -1,9 +1,9 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import TopBar from '../../components/home/TopBar';
-import NavBar from '../../components/home/NavBar';
-import ReviewCard from '../../components/reviews/ReviewCard';
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import TopBar from "../../components/home/TopBar";
+import NavBar from "../../components/home/NavBar";
+import ReviewCard from "../../components/reviews/ReviewCard";
 import WriteBtn from "../../images/write-btn.png";
 
 const ReviewsResult: React.FC = () => {
@@ -32,21 +32,23 @@ const ReviewsResult: React.FC = () => {
               avatarSrc={post.avatarSrc}
               name={post.name}
               region={post.region}
-              duration={post.duration}
+              trip_time={post.trip_time}
               cost={post.cost}
               rating={post.rating}
-              description={post.description}
+              content={post.content}
               imageSrc={post.imageSrc}
-              likes={post.likes}
+              like_count={post.like_count}
               bookmarks={post.bookmarks}
             />
           ))
         ) : (
-          <NoPostsMessage>No posts found. Please apply a different filter.</NoPostsMessage>
+          <NoPostsMessage>
+            No posts found. Please apply a different filter.
+          </NoPostsMessage>
         )}
       </ContentBox>
       <NavBarContainer>
-        <NavBar pageName="reviews/result" />
+        <NavBar pageName="reviews" />
       </NavBarContainer>
       <BtnBox>
         <Write
@@ -127,8 +129,8 @@ const NoPostsMessage = styled.p`
 
 const BtnBox = styled.div`
   position: fixed;
-  bottom: 75px;
-  right: 170px;
+  bottom: 96px;
+  right: 530px;
 `;
 
 const Write = styled.img`

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import TopBar from '../../components/home/TopBar';
-import NavBar from '../../components/home/NavBar';
-import ReviewCard from '../../components/reviews/ReviewCard';
-import ReviewFilter from '../../components/reviews/ReviewFilter';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import TopBar from "../../components/home/TopBar";
+import NavBar from "../../components/home/NavBar";
+import ReviewCard from "../../components/reviews/ReviewCard";
+import ReviewFilter from "../../components/reviews/ReviewFilter";
 
 const ReviewsPage: React.FC = () => {
   // 샘플 게시글 데이터
@@ -12,39 +12,40 @@ const ReviewsPage: React.FC = () => {
       id: 1,
       avatarSrc: "/images/sample-profile.svg",
       name: "Mutsa",
-      duration: "1 week",
+      trip_time: "1 week",
       cost: "150,000",
       region: "North America",
       rating: "★★★★☆",
-      description: "Amumal Amumal beautiful trip~~~~~~ I wanna live there enjoying this beautiful scenery",
+      content:
+        "Amumal Amumal beautiful trip~~~~~~ I wanna live there enjoying this beautiful scenery",
       imageSrc: "/images/review-sample.png",
-      likes: 1116,
+      like_count: 1116,
       bookmarks: 300,
     },
     {
       id: 2,
       avatarSrc: "/images/sample-profile.svg",
       name: "Alex",
-      duration: "3 days",
+      trip_time: "3 days",
       cost: "200,000",
       region: "Europe",
       rating: "★★★☆☆",
-      description: "Paris was wonderful, but it was a little expensive!",
+      content: "Paris was wonderful, but it was a little expensive!",
       imageSrc: "/images/review-sample.png",
-      likes: 345,
+      like_count: 345,
       bookmarks: 150,
     },
     {
       id: 3,
       avatarSrc: "/images/sample-profile.svg",
       name: "John",
-      duration: "2 weeks",
+      trip_time: "2 weeks",
       cost: "500,000",
       region: "Asia",
       rating: "★★★★★",
-      description: "Tokyo is amazing! I loved the food and culture.",
+      content: "Tokyo is amazing! I loved the food and culture.",
       imageSrc: "/images/review-sample.png",
-      likes: 567,
+      like_count: 567,
       bookmarks: 245,
     },
   ];
@@ -54,18 +55,32 @@ const ReviewsPage: React.FC = () => {
   const [filteredPosts, setFilteredPosts] = useState(samplePosts);
 
   // 필터 적용 핸들러
-  const handleFilter = (filters: { duration: string; durationUnit: string; cost: string; costUnit: string; region: string }) => {
+  const handleFilter = (filters: {
+    trip_time: string;
+    trip_timeUnit: string;
+    cost: string;
+    costUnit: string;
+    region: string;
+  }) => {
     let filtered = samplePosts;
 
     // 필터링 조건 적용
-    if (filters.duration) {
-      filtered = filtered.filter(post => post.duration.includes(filters.duration));
+    if (filters.trip_time) {
+      filtered = filtered.filter((post) =>
+        post.trip_time.includes(filters.trip_time)
+      );
     }
     if (filters.cost) {
-      filtered = filtered.filter(post => parseInt(post.cost.replace(/,/g, '')) <= parseInt(filters.cost.replace(/,/g, '')));
+      filtered = filtered.filter(
+        (post) =>
+          parseInt(post.cost.replace(/,/g, "")) <=
+          parseInt(filters.cost.replace(/,/g, ""))
+      );
     }
     if (filters.region) {
-      filtered = filtered.filter(post => post.region.includes(filters.region));
+      filtered = filtered.filter((post) =>
+        post.region.includes(filters.region)
+      );
     }
 
     setFilteredPosts(filtered);
@@ -87,18 +102,20 @@ const ReviewsPage: React.FC = () => {
                 key={post.id}
                 avatarSrc={post.avatarSrc}
                 name={post.name}
-                duration={post.duration}
+                trip_time={post.trip_time}
                 cost={post.cost}
                 region={post.region}
                 rating={post.rating}
-                description={post.description}
+                content={post.content}
                 imageSrc={post.imageSrc}
-                likes={post.likes}
+                like_count={post.like_count}
                 bookmarks={post.bookmarks}
               />
             ))
           ) : (
-            <NoPostsMessage>No posts found. Please apply a different filter.</NoPostsMessage>
+            <NoPostsMessage>
+              No posts found. Please apply a different filter.
+            </NoPostsMessage>
           )}
         </ReviewList>
       </ContentBox>

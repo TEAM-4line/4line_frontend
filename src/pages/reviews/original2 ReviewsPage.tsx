@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import ReviewFilter from '../../components/reviews/ReviewFilter';
-import ReviewCard from '../../components/reviews/ReviewCard';
-import TopBar from '../../components/home/TopBar';
-import NavBar from '../../components/home/NavBar';
+import React, { useState } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import ReviewFilter from "../../components/reviews/ReviewFilter";
+import ReviewCard from "../../components/reviews/ReviewCard";
+import TopBar from "../../components/home/TopBar";
+import NavBar from "../../components/home/NavBar";
 
 const ReviewsPage: React.FC = () => {
   // 상태 정의: 필터링된 게시글들
@@ -13,23 +13,30 @@ const ReviewsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // 필터링 조건을 사용하여 백엔드 API 호출
-  const handleSearch = async (filterData: { duration: string; cost: string; region: string }) => {
+  const handleSearch = async (filterData: {
+    trip_time: string;
+    cost: string;
+    region: string;
+  }) => {
     setLoading(true);
     setError(null);
     try {
       // 백엔드 API 요청
-      const response = await axios.get('https://api.your-backend.com/community/posts', {
-        params: {
-          duration: filterData.duration,
-          cost: filterData.cost,
-          region: filterData.region,
-        },
-      });
+      const response = await axios.get(
+        "https://api.your-backend.com/community/posts",
+        {
+          params: {
+            trip_time: filterData.trip_time,
+            cost: filterData.cost,
+            region: filterData.region,
+          },
+        }
+      );
       // 필터링된 결과를 상태로 설정
       setFilteredPosts(response.data);
     } catch (err) {
-      console.error('게시글 필터링 실패:', err);
-      setError('Failed to load posts. Please try again later.');
+      console.error("게시글 필터링 실패:", err);
+      setError("Failed to load posts. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -59,23 +66,25 @@ const ReviewsPage: React.FC = () => {
                 avatarSrc={post.avatarSrc}
                 name={post.name}
                 // location={post.location}
-                duration={post.duration}
+                trip_time={post.trip_time}
                 cost={post.cost}
                 region={post.region}
                 rating={post.rating}
-                description={post.description}
+                content={post.content}
                 imageSrc={post.imageSrc}
-                likes={post.likes}
+                like_count={post.like_count}
                 bookmarks={post.bookmarks}
               />
             ))
           ) : (
-            <NoPostsMessage>No posts found. Please apply a different filter.</NoPostsMessage>
+            <NoPostsMessage>
+              No posts found. Please apply a different filter.
+            </NoPostsMessage>
           )}
         </PostsSection>
       </ContentWrapper>
       <NavBarContainer>
-        <NavBar pageName="reviews"/>
+        <NavBar pageName="reviews" />
       </NavBarContainer>
     </PageWrapper>
   );
@@ -106,7 +115,7 @@ const TopBarContainer = styled.div`
 
 const ContentWrapper = styled.div`
   flex: 1;
-  max-width: 412px; 
+  max-width: 412px;
   width: 100%;
   margin: 0 auto;
   padding-top: 90px; // TopBar의 높이를 고려한 패딩
