@@ -21,7 +21,7 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onSearch }) => {
 
   const [showFilter, setShowFilter] = useState(false); // 필터 표시 여부 상태
 
-  const trip_timeOptions = ["일", "주일", "개월"];
+  const trip_timeOptions = ["일", "주", "개월"];
   const costOptions = ["원(₩)", "달러($)"];
   const regionOptions = [
     "아시아",
