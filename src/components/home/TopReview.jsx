@@ -6,12 +6,21 @@ import SampleImg from "../../images/review-sample.png";
 import styled from "styled-components";
 
 const TopReview = ({ reviews }) => {
+  const Server_IP = process.env.REACT_APP_Server_IP;
+  //   const profileImageURL = reviews.photo
+  //     ? `${Server_IP}${reviews.photo}`
+  //     : SampleImg;
+
+  //   const profileImageURL =
+  //     reviews.photo && reviews.photo.startsWith("/")
+  //       ? `${Server_IP}${reviews.photo}`
+  //       : SampleImg;
   return (
     <div>
       {reviews?.map((review) => (
         <TopReviewWrapper key={review.id}>
           <Left>
-            <Img src={review.photo || SampleImg} />
+            <Img src={`${Server_IP}${review.photo}`} />
           </Left>
           <Right>
             <Title>{review.title}</Title>
@@ -64,6 +73,7 @@ const Title = styled.div`
 const Img = styled.img`
   width: 90px;
   height: 100px;
+  border-radius: 10px;
 `;
 
 const IconRow = styled.div`

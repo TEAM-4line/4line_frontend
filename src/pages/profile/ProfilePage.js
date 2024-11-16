@@ -26,6 +26,7 @@ const ProfilePage = () => {
             },
           }
         );
+        console.log(response.data);
         const profileImageURL =
           response.data.profile_image &&
           response.data.profile_image.startsWith("/")
@@ -37,6 +38,7 @@ const ProfilePage = () => {
           email: response.data.email,
           intro: response.data.intro,
         });
+        console.log(userInfo);
         console.log("Profile Image URL:", profileImageURL);
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
