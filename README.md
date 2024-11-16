@@ -17,7 +17,6 @@
 
 ## 📙 프로젝트 소개
 
-- **서비스 소개**
 <img width="1386" alt="스크린샷 2024-11-16 오후 11 53 58" src="https://github.com/user-attachments/assets/1ad66f53-5039-4168-a9e6-09104f549394">
 <img width="1386" alt="스크린샷 2024-11-16 오후 11 54 05" src="https://github.com/user-attachments/assets/b2be5025-1abf-43a3-8980-865dc22e1da6">
 <img width="1386" alt="스크린샷 2024-11-16 오후 11 54 12" src="https://github.com/user-attachments/assets/d57c8a5a-d6fd-4064-8b2f-415130ea31cb">
