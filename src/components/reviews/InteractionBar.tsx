@@ -1,19 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface InteractionBarProps {
-  likes: number;
+  like_count: number;
   bookmarks: number;
 }
 
-const InteractionBar: React.FC<InteractionBarProps> = ({ likes, bookmarks }) => {
+const InteractionBar: React.FC<InteractionBarProps> = ({
+  like_count,
+  bookmarks,
+}) => {
   return (
     <BarContainer>
       {/* 좋아요 버튼 */}
       <ButtonContainer>
         <Button
           aria-label="Like"
-          onClick={() => alert('좋아요를 눌렀습니다!')} // 좋아요 로직을 추가할 수 있습니다
+          onClick={() => alert("좋아요를 눌렀습니다!")} // 좋아요 로직을 추가할 수 있습니다
         >
           <img
             loading="lazy"
@@ -22,14 +25,14 @@ const InteractionBar: React.FC<InteractionBarProps> = ({ likes, bookmarks }) => 
             alt="Like"
           />
         </Button>
-        <Count>{likes}</Count>
+        <Count>{like_count}</Count>
       </ButtonContainer>
 
       {/* 북마크 버튼 */}
       <ButtonContainerRight>
         <Button
           aria-label="Bookmark"
-          onClick={() => alert('북마크를 눌렀습니다!')} // 북마크 로직을 추가할 수 있습니다
+          onClick={() => alert("북마크를 눌렀습니다!")} // 북마크 로직을 추가할 수 있습니다
         >
           <img
             loading="lazy"

@@ -39,10 +39,11 @@ function App() {
         {/* Nav - Reviews */}
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/reviews/result" element={<ReviewsResult />} />
-        <Route path="/reviews/new_review" element={<NewReviewPage />} /> 
+        <Route path="/reviews/new_review" element={<NewReviewPage />} />
 
         {/* Nav - Profile */}
-        <Route path="/profile/:name" element={<ProfilePage />} />      </Routes>
+        <Route path="/profile/:name" element={<ProfilePage />} />
+      </Routes>
     </div>
   );
 }

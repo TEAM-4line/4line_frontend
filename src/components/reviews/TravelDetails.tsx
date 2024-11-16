@@ -1,27 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface TravelDetailsProps {
-  duration: string;
+  trip_time: string;
   cost: string;
   region: string;
   rating: string;
-  description: string;
+  content: string;
 }
 
 const TravelDetails: React.FC<TravelDetailsProps> = ({
-  duration,
+  trip_time,
   cost,
   region,
   rating,
-  description
+  content,
 }) => {
   return (
     <DetailsSection>
       {/* 여행 기간 */}
       <DetailRow>
         <Label># 여행기간</Label>
-        <Content>{duration}</Content>
+        <Content>{trip_time}</Content>
       </DetailRow>
 
       {/* 비용 */}
@@ -43,7 +43,7 @@ const TravelDetails: React.FC<TravelDetailsProps> = ({
       </DetailRow>
 
       {/* 설명 */}
-      <Description>{description}</Description>
+      <Description>{content}</Description>
     </DetailsSection>
   );
 };
