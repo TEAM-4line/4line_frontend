@@ -1,17 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface UserInfoProps {
   username: string;
   region: string;
+  profile_image: string;
 }
 
-const UserInfo: React.FC<UserInfoProps> = ({ username, region }) => {
+const UserInfo: React.FC<UserInfoProps> = ({
+  username,
+  region,
+  profile_image,
+}) => {
   return (
     <UserInfoWrapper>
       <ProfileImg
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/46bcb6a6bd223165193a3b52b2763e1eac3c68b580db04b6e0f2c694acd296ec?placeholderIfAbsent=true&apiKey=759653f2ab50441cb226416825bdb2ac"
-        alt={`${username}'s profile`}
+        // src="https://cdn.builder.io/api/v1/image/assets/TEMP/46bcb6a6bd223165193a3b52b2763e1eac3c68b580db04b6e0f2c694acd296ec?placeholderIfAbsent=true&apiKey=759653f2ab50441cb226416825bdb2ac"
+        // alt={`${username}'s profile`}
+        src={profile_image}
       />
       <Username>{username}</Username>
       <ArrowIcon
@@ -23,8 +29,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ username, region }) => {
   );
 };
 
-
-
 export default UserInfo;
 
 const UserInfoWrapper = styled.header`
@@ -34,7 +38,6 @@ const UserInfoWrapper = styled.header`
   font-size: 17px; // 기본 폰트 크기 설정
   color: #333; // 기본 텍스트 색상 설정
 `;
-
 
 const ProfileImg = styled.img`
   width: 32px; // 프로필 이미지 크기 줄임

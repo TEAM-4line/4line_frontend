@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TopBar from "../../components/home/TopBar";
 import NavBar from "../../components/home/NavBar";
 import axios from "axios";
 
 const NewReviewPage: React.FC = () => {
+  const navigate = useNavigate();
   const Server_IP = process.env.REACT_APP_Server_IP; // 서버 IP 가져오기
   const accessToken = localStorage.getItem("access"); // 인증 토큰 가져오기
   const userId = localStorage.getItem("id"); // 사용자 ID 가져오기
@@ -95,6 +97,7 @@ const NewReviewPage: React.FC = () => {
           activity: "",
           rating: null,
         });
+        navigate(-1);
       })
       .catch((error) => {
         console.error("게시글 작성 실패:", error);

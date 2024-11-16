@@ -1,23 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
+import React from "react";
+import styled from "styled-components";
+import axios from "axios";
 
 interface ImageSectionProps {
-  imageSrc: string;
+  photo: string;
 }
 
-const ImageSection: React.FC<ImageSectionProps> = ({ imageSrc }) => {
+const ImageSection: React.FC<ImageSectionProps> = ({ photo }) => {
   return (
     <ImageWrapper>
-      <StyledImage
-        loading="lazy"
-        src={imageSrc}
-        alt="Travel destination"
-      />
+      <StyledImage loading="lazy" src={photo} alt="Travel destination" />
     </ImageWrapper>
   );
 };
-
 
 export default ImageSection;
 

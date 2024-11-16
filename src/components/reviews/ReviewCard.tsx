@@ -6,33 +6,35 @@ import InteractionBar from "./InteractionBar";
 import styled from "styled-components";
 
 interface ReviewCardProps {
-  avatarSrc: string;
+  // avatarSrc: string;
   name: string;
+  profile_image: string;
   trip_time: string;
   cost: string;
   region: string;
   rating: string;
   content: string;
-  imageSrc: string;
+  photo: string;
   like_count: number;
   bookmarks: number;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
-  avatarSrc,
+  // avatarSrc,
   name,
+  profile_image,
   trip_time,
   cost,
   region,
   rating,
   content,
-  imageSrc,
+  photo,
   like_count,
   bookmarks,
 }) => {
   return (
     <CardContainer>
-      <UserInfo username={name} region={region} />
+      <UserInfo username={name} region={region} profile_image={profile_image} />
       <TravelDetails
         trip_time={trip_time}
         cost={cost}
@@ -40,7 +42,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
         rating={rating}
         content={content}
       />
-      <ImageSection imageSrc={imageSrc} />
+      <ImageSection photo={photo} />
       <InteractionBar like_count={like_count} bookmarks={bookmarks} />
     </CardContainer>
   );
