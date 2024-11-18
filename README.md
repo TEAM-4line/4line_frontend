@@ -29,7 +29,9 @@
 
 ## 프론트 팀원 소개
 
-| 팀원 이름 | 역할            | 사진                                                                                                      | 담당 업무                                                                                                                                                          |
-|-----------|-----------------|-----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 김세연    | 프론트엔드      | <img src="https://i.ibb.co/sWXnzcJ/befbedf87e51f5b02aac8b882ada60fd-sticker.png" alt="김세연" width="90px"> | - 디자인<br>- 여행 정보 게시판                                                                                                                                |
-| 성윤정    | 프론트엔드      | <img src="https://i.ibb.co/MRr1QMW/f67635fddb50d05f2d0f142e63b0ab5c-sticker.png" alt="성윤정" width="90px"> | - 로그인 및 회원가입 <br>- 여행 유형 테스트 <br>- 메인 페이지 <br>- 여행 동행 게시판 <br>- 여행 정보 게시판                                     |
+|이름| |개발 분야|개인 레포|역할|
+|---|---|---|---|---|
+|김세연|<img width="50" src="https://i.ibb.co/MRr1QMW/f67635fddb50d05f2d0f142e63b0ab5c-sticker.png">|frontend|[githubseyeon](https://github.com/githubseyeon)|피그마 디자인, 여행 정보 게시판|
+|성윤정|<img width="50" src="https://i.ibb.co/sWXnzcJ/befbedf87e51f5b02aac8b882ada60fd-sticker.png">|frontend|[ynzung](https://github.com/ynzung)|로그인 및 회원가입, 여행 유형 테스트, 메인페이지, 여행 동행 게시판, 여행 정보 게시판|
+
+<br>
