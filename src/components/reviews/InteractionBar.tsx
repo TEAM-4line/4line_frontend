@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { FaRegHeart } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa6";
 
 interface InteractionBarProps {
   id: number;
@@ -13,14 +15,14 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
   like_count,
   scrap_count,
 }) => {
-  const [isLike, setIsLike] = useState(like_count || 0);
-  const [isScrap, setIsScrap] = useState(scrap_count || 0);
+  const [likeCount, setLikeCount] = useState(like_count || 0);
+  const [scrapCount, setScrapCount] = useState(scrap_count || 0);
   const Server_IP = process.env.REACT_APP_Server_IP || "http://localhost:8000";
   const accessToken = localStorage.getItem("access");
 
   useEffect(() => {
-    setIsLike(like_count);
-    setIsScrap(scrap_count);
+    setLikeCount(like_count);
+    setScrapCount(scrap_count);
   }, [like_count, scrap_count]);
 
   const handlePostLike = async (id: number) => {
@@ -36,9 +38,9 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
       );
       console.log(response.data);
       if (response.data.status === "like removed") {
-        setIsLike((prev) => prev - 1);
+        setLikeCount((prev) => prev - 1);
       } else {
-        setIsLike((prev) => prev + 1);
+        setLikeCount((prev) => prev + 1);
       }
     } catch (error) {
       console.log(error);
@@ -58,9 +60,9 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
       );
       console.log(response.data);
       if (response.data.status === "scrap removed") {
-        setIsScrap((prev) => prev - 1);
+        setScrapCount((prev) => prev - 1);
       } else {
-        setIsScrap((prev) => prev + 1);
+        setScrapCount((prev) => prev + 1);
       }
     } catch (error) {
       console.log(error);
@@ -72,14 +74,14 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
       {/* 좋아요 버튼 */}
       <ButtonContainer>
         <Button aria-label="Like" onClick={() => handlePostLike(id)}>
-          <img
+          {/* <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/875c15b294a13dfc09e9c842e6e6782bd88c2808f1ba3f9dc74fc7bee3b265a4?placeholderIfAbsent=true&apiKey=759653f2ab50441cb226416825bdb2ac"
             className="object-contain shrink-0 aspect-[1.1] w-[22px]"
             alt="Like"
-          />
+          /> */}
         </Button>
-        <Count>{isLike}</Count>
+        <Count>{likeCount}</Count>
       </ButtonContainer>
 
       {/* 북마크 버튼 */}
@@ -94,7 +96,7 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
             alt="Bookmark"
           />
         </Button>
-        <Count>{isScrap}</Count>
+        <Count>{scrapCount}</Count>
       </ButtonContainerRight>
     </BarContainer>
   );
