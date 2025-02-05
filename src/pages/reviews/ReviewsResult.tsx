@@ -44,6 +44,7 @@ const ReviewsResult: React.FC = () => {
         ) : filteredPosts.length > 0 ? (
           filteredPosts.map((post: Post) => (
             <ReviewCard
+              id={post.id}
               key={post.id}
               // avatarSrc={post.avatarSrc}
               photo={post.photo}

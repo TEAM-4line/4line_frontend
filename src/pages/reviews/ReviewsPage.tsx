@@ -50,7 +50,7 @@ const ReviewsPage: React.FC = () => {
         },
       });
       setFilteredPosts(response.data);
-      console.log(filteredPosts);
+      console.log("filteredPosts", filteredPosts);
     } catch (error) {
       console.log(error);
     } finally {
@@ -78,6 +78,7 @@ const ReviewsPage: React.FC = () => {
           ) : filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
               <ReviewCard
+                id={post.id}
                 key={post.id}
                 // avatarSrc={post.avatarSrc}
                 photo={post.photo}

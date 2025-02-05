@@ -44,6 +44,7 @@ const ReviewPage: React.FC = () => {
         <TopBar PageName="Reviews" userImg="/images/sample-profile.svg" />
         {samplePosts.map((post) => (
           <ReviewCard
+            id={post.id}
             key={post.id}
             // avatarSrc={post.avatarSrc}
             name={post.name}
