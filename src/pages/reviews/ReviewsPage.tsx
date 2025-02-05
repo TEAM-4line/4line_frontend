@@ -26,7 +26,7 @@ interface Post {
   content: string;
   profile_image: string;
   like_count: number;
-  bookmarks: number;
+  scrap_count: number;
 }
 
 const Server_IP = process.env.REACT_APP_Server_IP || "http://localhost:8000";
@@ -90,7 +90,7 @@ const ReviewsPage: React.FC = () => {
                 content={post.content}
                 profile_image={`${Server_IP}/media/${post.profile_image}`}
                 like_count={post.like_count}
-                bookmarks={post.bookmarks}
+                scrap_count={post.scrap_count}
               />
             ))
           ) : (
