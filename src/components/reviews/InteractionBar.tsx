@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -16,17 +16,19 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
   const Server_IP = process.env.REACT_APP_Server_IP || "http://localhost:8000";
   const accessToken = localStorage.getItem("access");
 
+  useEffect(() => {});
+
   const handlePostLike = async (id: number) => {
     try {
       const response = await axios.post(
         `${Server_IP}/api/community/post/${id}/like`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-      // setFilteredPosts(response.data);
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -37,6 +39,7 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
     try {
       const response = await axios.post(
         `${Server_IP}/api/community/post/${id}/scrap`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
