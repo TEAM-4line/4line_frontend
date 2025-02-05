@@ -1,23 +1,60 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 interface InteractionBarProps {
+  id: number;
   like_count: number;
   bookmarks: number;
 }
 
 const InteractionBar: React.FC<InteractionBarProps> = ({
+  id,
   like_count,
   bookmarks,
 }) => {
+  const Server_IP = process.env.REACT_APP_Server_IP || "http://localhost:8000";
+  const accessToken = localStorage.getItem("access");
+
+  const handlePostLike = async (id: number) => {
+    try {
+      const response = await axios.post(
+        `${Server_IP}/api/community/post/${id}/like`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      // setFilteredPosts(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlePostScrap = async (id: number) => {
+    try {
+      const response = await axios.post(
+        `${Server_IP}/api/community/post/${id}/scrap`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      // setFilteredPosts(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <BarContainer>
       {/* 좋아요 버튼 */}
       <ButtonContainer>
-        <Button
-          aria-label="Like"
-          onClick={() => alert("좋아요를 눌렀습니다!")} // 좋아요 로직을 추가할 수 있습니다
-        >
+        <Button aria-label="Like" onClick={() => handlePostLike(id)}>
           <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/875c15b294a13dfc09e9c842e6e6782bd88c2808f1ba3f9dc74fc7bee3b265a4?placeholderIfAbsent=true&apiKey=759653f2ab50441cb226416825bdb2ac"
@@ -32,7 +69,7 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
       <ButtonContainerRight>
         <Button
           aria-label="Bookmark"
-          onClick={() => alert("북마크를 눌렀습니다!")} // 북마크 로직을 추가할 수 있습니다
+          onClick={() => handlePostScrap(id)} // 북마크 로직을 추가할 수 있습니다
         >
           <img
             loading="lazy"
