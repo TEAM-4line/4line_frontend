@@ -1,22 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
 interface InteractionBarProps {
   id: number;
   like_count: number;
-  bookmarks: number;
+  scrap_count: number;
 }
 
 const InteractionBar: React.FC<InteractionBarProps> = ({
   id,
   like_count,
-  bookmarks,
+  scrap_count,
 }) => {
+  const [isLike, setIsLike] = useState(like_count || 0);
+  const [isScrap, setIsScrap] = useState(scrap_count || 0);
   const Server_IP = process.env.REACT_APP_Server_IP || "http://localhost:8000";
   const accessToken = localStorage.getItem("access");
 
-  useEffect(() => {});
+  useEffect(() => {
+    setIsLike(like_count);
+    setIsScrap(scrap_count);
+  }, [like_count, scrap_count]);
 
   const handlePostLike = async (id: number) => {
     try {
@@ -30,6 +35,11 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
         }
       );
       console.log(response.data);
+      if (response.data.status === "like removed") {
+        setIsLike((prev) => prev - 1);
+      } else {
+        setIsLike((prev) => prev + 1);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -46,8 +56,12 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
           },
         }
       );
-      // setFilteredPosts(response.data);
       console.log(response.data);
+      if (response.data.status === "scrap removed") {
+        setIsScrap((prev) => prev - 1);
+      } else {
+        setIsScrap((prev) => prev + 1);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +79,7 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
             alt="Like"
           />
         </Button>
-        <Count>{like_count}</Count>
+        <Count>{isLike}</Count>
       </ButtonContainer>
 
       {/* 북마크 버튼 */}
@@ -80,7 +94,7 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
             alt="Bookmark"
           />
         </Button>
-        <Count>{bookmarks}</Count>
+        <Count>{isScrap}</Count>
       </ButtonContainerRight>
     </BarContainer>
   );
