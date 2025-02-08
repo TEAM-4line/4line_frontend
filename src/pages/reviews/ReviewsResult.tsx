@@ -18,7 +18,7 @@ interface Post {
   content: string;
   imageSrc: string;
   like_count: number;
-  bookmarks: number;
+  scrap_count: number;
 }
 
 const ReviewsResult: React.FC = () => {
@@ -44,6 +44,7 @@ const ReviewsResult: React.FC = () => {
         ) : filteredPosts.length > 0 ? (
           filteredPosts.map((post: Post) => (
             <ReviewCard
+              id={post.id}
               key={post.id}
               // avatarSrc={post.avatarSrc}
               photo={post.photo}
@@ -56,7 +57,7 @@ const ReviewsResult: React.FC = () => {
               content={post.content}
               // imageSrc={post.imageSrc}
               like_count={post.like_count}
-              bookmarks={post.bookmarks}
+              scrap_count={post.scrap_count}
             />
           ))
         ) : (

@@ -6,6 +6,7 @@ import InteractionBar from "./InteractionBar";
 import styled from "styled-components";
 
 interface ReviewCardProps {
+  id: number;
   // avatarSrc: string;
   name: string;
   profile_image: string;
@@ -16,11 +17,12 @@ interface ReviewCardProps {
   content: string;
   photo: string;
   like_count: number;
-  bookmarks: number;
+  scrap_count: number;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
   // avatarSrc,
+  id,
   name,
   profile_image,
   trip_time,
@@ -30,7 +32,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   content,
   photo,
   like_count,
-  bookmarks,
+  scrap_count,
 }) => {
   return (
     <CardContainer>
@@ -43,7 +45,11 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
         content={content}
       />
       <ImageSection photo={photo} />
-      <InteractionBar like_count={like_count} bookmarks={bookmarks} />
+      <InteractionBar
+        id={id}
+        like_count={like_count}
+        scrap_count={scrap_count}
+      />
     </CardContainer>
   );
 };

@@ -26,7 +26,7 @@ interface Post {
   content: string;
   profile_image: string;
   like_count: number;
-  bookmarks: number;
+  scrap_count: number;
 }
 
 const Server_IP = process.env.REACT_APP_Server_IP || "http://localhost:8000";
@@ -50,7 +50,7 @@ const ReviewsPage: React.FC = () => {
         },
       });
       setFilteredPosts(response.data);
-      console.log(filteredPosts);
+      console.log("filteredPosts", filteredPosts);
     } catch (error) {
       console.log(error);
     } finally {
@@ -78,6 +78,7 @@ const ReviewsPage: React.FC = () => {
           ) : filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
               <ReviewCard
+                id={post.id}
                 key={post.id}
                 // avatarSrc={post.avatarSrc}
                 photo={post.photo}
@@ -89,7 +90,7 @@ const ReviewsPage: React.FC = () => {
                 content={post.content}
                 profile_image={`${Server_IP}/media/${post.profile_image}`}
                 like_count={post.like_count}
-                bookmarks={post.bookmarks}
+                scrap_count={post.scrap_count}
               />
             ))
           ) : (
