@@ -1,24 +1,36 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { FaRegHeart } from "react-icons/fa6";
-import { FaHeart } from "react-icons/fa6";
+// import { FaRegHeart } from "react-icons/fa6";
+// import { FaHeart } from "react-icons/fa6";
 
 interface InteractionBarProps {
   id: number;
   like_count: number;
   scrap_count: number;
+  scraps: [];
+  likes: [];
 }
 
 const InteractionBar: React.FC<InteractionBarProps> = ({
   id,
   like_count,
   scrap_count,
+  scraps,
+  likes,
 }) => {
   const [likeCount, setLikeCount] = useState(like_count || 0);
   const [scrapCount, setScrapCount] = useState(scrap_count || 0);
   const Server_IP = process.env.REACT_APP_Server_IP || "http://localhost:8000";
   const accessToken = localStorage.getItem("access");
+  // const userId = localStorage.getItem("id");
+  // const [isLike, setIsLike] = useState(false);
+  // const [isScrap, setIsScrap] = useState(false);
+
+  // useEffect(() => {
+  //   setIsScrap(scraps.includes(userId));
+  //   setIsLike(likes.includes(userId));
+  // }, [scraps, likes, userId]);
 
   useEffect(() => {
     setLikeCount(like_count);
@@ -74,12 +86,13 @@ const InteractionBar: React.FC<InteractionBarProps> = ({
       {/* 좋아요 버튼 */}
       <ButtonContainer>
         <Button aria-label="Like" onClick={() => handlePostLike(id)}>
-          {/* <img
+          <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/875c15b294a13dfc09e9c842e6e6782bd88c2808f1ba3f9dc74fc7bee3b265a4?placeholderIfAbsent=true&apiKey=759653f2ab50441cb226416825bdb2ac"
             className="object-contain shrink-0 aspect-[1.1] w-[22px]"
             alt="Like"
-          /> */}
+          />
+          {/* {isLike ? <FaHeart /> : <FaRegHeart />} */}
         </Button>
         <Count>{likeCount}</Count>
       </ButtonContainer>
