@@ -19,6 +19,8 @@ interface Post {
   imageSrc: string;
   like_count: number;
   scrap_count: number;
+  scraps: [];
+  likes: [];
 }
 
 const ReviewsResult: React.FC = () => {
@@ -58,6 +60,8 @@ const ReviewsResult: React.FC = () => {
               // imageSrc={post.imageSrc}
               like_count={post.like_count}
               scrap_count={post.scrap_count}
+              scraps={post.scraps}
+              likes={post.likes}
             />
           ))
         ) : (
