@@ -18,6 +18,8 @@ interface ReviewCardProps {
   photo: string;
   like_count: number;
   scrap_count: number;
+  likes: [];
+  scraps: [];
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
@@ -33,6 +35,8 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   photo,
   like_count,
   scrap_count,
+  likes,
+  scraps,
 }) => {
   return (
     <CardContainer>
@@ -47,6 +51,8 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
       <ImageSection photo={photo} />
       <InteractionBar
         id={id}
+        scraps={scraps}
+        likes={likes}
         like_count={like_count}
         scrap_count={scrap_count}
       />
